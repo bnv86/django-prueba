@@ -1,0 +1,14 @@
+pip install mysqlclient o pip install psycopg2
+pip freeze
+manage.py migrate
+manage.py createsuperuser
+username: admin
+email: vituccibruno@
+pass: ********
+
+manage.py runserver
+
+ir a localhost:8000
+si entra bien, luego a localhost:8000/admin
+
+
