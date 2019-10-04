@@ -1,6 +1,6 @@
 from django.db import models
 
-from apps.adopcion.models import Persona
+from apps.adopcion.models import Persona, Solicitud
 
 # Create your models here.
 

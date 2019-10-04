@@ -26,6 +26,7 @@ urlpatterns = [
     #path('adopcion/', include ('apps.adopcion.urls', namespace="adopcion")),
     path('mascota/', include ('apps.mascota.urls'), name='mascota'),
     path('adopcion/', include ('apps.adopcion.urls'), name='adopcion'),
+    path('solicitud/', include ('apps.adopcion.urls'), name='solicitud'),
     path('bootstrap/', TemplateView.as_view(template_name='bootstrap/example.html')),
 ]
 
