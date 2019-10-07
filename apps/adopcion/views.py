@@ -66,3 +66,22 @@ class SolicitudUpdate(UpdateView):
             contexto['form2'] = self.form_class2(instance=persona)
         contexto['id'] = pk
         return contexto
+
+    def post_data(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        id_solicitud = kwargs['pk']
+        solicitud = self.model1.objects.get(id=id_solicitud)
+        persona = self.model2.objects.get(id=solicitud.persona_id)
+        form1 = self.form_class1(request.POST, instance=solicitud)
+        form2 = self.form_class2(request.POST, instance=persona)
+        if form1.is_valid() and form2.is_valid():
+            form1.save()
+            form2.save()
+            return HttpResponseRedirect(self.get_success_url())
+        else:
+            return HttpResponseRedirect(self.get_success_url())
+
+class SolicitudDelete(DeleteView):
+    model = Solicitud
+    template_name = 'adopcion/delete.html'
+    success_url = reverse_lazy('solicitud_listar')
