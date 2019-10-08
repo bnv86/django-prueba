@@ -1,4 +1,5 @@
 pip install mysqlclient o pip install psycopg2
+python -m pip install --upgrade pip
 pip freeze
 manage.py migrate
 manage.py createsuperuser
@@ -10,5 +11,10 @@ manage.py runserver
 
 ir a localhost:8000
 si entra bien, luego a localhost:8000/admin
+
+
+--- 
+
+en la pc de la muni apache corre con 82 y 4432
 
 
