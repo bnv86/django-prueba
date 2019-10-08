@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.views.generic import TemplateView
+from django.contrib.auth.views import LoginView
 
 
 urlpatterns = [
@@ -27,8 +28,11 @@ urlpatterns = [
     path('mascota/', include ('apps.mascota.urls'), name='mascota'),
     path('adopcion/', include ('apps.adopcion.urls'), name='adopcion'),
     path('solicitud/', include ('apps.adopcion.urls'), name='solicitud'),
+    path('usuario/', include ('apps.usuario.urls'), name='usuario'),
+    path('', LoginView.as_view(template_name='usuario/index.html'), name='login'),
     path('bootstrap/', TemplateView.as_view(template_name='bootstrap/example.html')),
 ]
 
 urlpatterns += staticfiles_urlpatterns()
 
+#path('', login, {'template_name':'index.html'}, name='login'),

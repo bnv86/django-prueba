@@ -1,0 +1,41 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+Refugio
+{% endblock %}
+
+{% block navbar %}
+{% endblock %}
+
+{% block content %}
+
+<form method="post">
+    {% csrf_token %}
+
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="form-group">
+                <label>Nombre de usuario:</label>
+                <input class="form-control" type="text" name="username">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="form-group">
+                <label>Contraseña:</label>
+                <input class="form-control" type="password" name="password">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="form-group">
+                <a href="#">Olvidé mi contraseña</a>
+                <input class="btn btn-primary" type="submit" name="Ingresar">
+            </div>
+        </div>
+    </div>
+</form>
+
+{% endblock %}
