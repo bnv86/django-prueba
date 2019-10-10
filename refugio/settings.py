@@ -136,6 +136,7 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
 #una vez logueado redirige a...
 LOGIN_REDIRECT_URL = reverse_lazy('solicitud_listar')
+LOGOUT_REDIRECT_URL = reverse_lazy('login')
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'mail.berazategui.gov.ar' #'smtp.gmail.com'

@@ -19,7 +19,7 @@ from django.urls import path
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView
-from django.contrib.auth.views import LoginView, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
+from django.contrib.auth.views import LoginView, logout_then_login, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
 #password_reset, password_reset_done, password_reset_confirm, password_reset_complete
 
 
@@ -31,7 +31,8 @@ urlpatterns = [
     path('adopcion/', include ('apps.adopcion.urls'), name='adopcion'),
     path('solicitud/', include ('apps.adopcion.urls'), name='solicitud'),
     path('usuario/', include ('apps.usuario.urls'), name='usuario'),
-    path('', LoginView.as_view(template_name='usuario/index.html'), name='login'),
+    path('logout/', logout_then_login, name='logout'),
+    path('accounts/login/', LoginView.as_view(template_name='usuario/index.html'), name='login'),
     path('reset/password_reset', PasswordResetView.as_view(template_name='registration/password_reset_form.html'), name='password_reset'), #, 'email_template_name':'registration/password_reset_email.html'
     path('reset/password_reset_done', PasswordResetDoneView.as_view(template_name='registration/password_reset_done.html'), name='password_reset_done'),
     path('reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>.+)', PasswordResetConfirmView.as_view(template_name='registration/password_reset_confirm.html'), name='password_reset_confirm'),

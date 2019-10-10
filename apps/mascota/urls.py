@@ -1,4 +1,5 @@
 from django.conf.urls import url, include
+from django.contrib.auth.decorators import login_required
 from apps.mascota.views import index_mascota, mascota_view, mascota_list, mascota_edit, mascota_delete, \
     MascotaList, MascotaCreate, MascotaUpdate, MascotaDelete
 from django.views.generic import TemplateView
@@ -7,10 +8,10 @@ urlpatterns = [
     #path('admin/', admin.site.urls),
     url(r'^$', index_mascota, name='index_mascota'),
     #vistas basadas en clases
-    url(r'^nueva$', MascotaCreate.as_view(), name='mascota_crear'),
-    url(r'^listar$', MascotaList.as_view(), name='mascota_listar'),
-    url(r'^editar/(?P<pk>\d+)/$', MascotaUpdate.as_view(), name='mascota_editar'),
-    url(r'^eliminar/(?P<pk>\d+)/$', MascotaDelete.as_view(), name='mascota_eliminar'),
+    url(r'^nueva$', login_required(MascotaCreate.as_view()), name='mascota_crear'),
+    url(r'^listar$', login_required(MascotaList.as_view()), name='mascota_listar'),
+    url(r'^editar/(?P<pk>\d+)/$', login_required(MascotaUpdate.as_view()), name='mascota_editar'),
+    url(r'^eliminar/(?P<pk>\d+)/$', login_required(MascotaDelete.as_view()), name='mascota_eliminar'),
 
     #vistas basadas en funciones
     #url(r'^listar$', mascota_list, name='mascota_listar'),

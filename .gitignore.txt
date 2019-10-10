@@ -1,3 +1,9 @@
+apps/__pycache__/*
+apps/adopcion/__pycache__/*
+apps/mascota/__pycache__/*
+apps/usuario/__pycache__/*
+refugio/__pycache__/*
+
 */__pycache__
 __pycache__/*
 */__pycache__/*
