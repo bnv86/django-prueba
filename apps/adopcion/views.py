@@ -5,8 +5,17 @@ from django.forms import ModelForm
 from apps.adopcion.models import Persona, Solicitud
 from apps.adopcion.forms import PersonaForm, SolicitudForm
 from django.urls import reverse_lazy
+from django.core import serializers
 
 # Create your views here.
+
+def listadoPersona(request):
+    lista = serializers.serialize('json', Persona.objects.all())
+    return HttpResponse(lista, content_type='application/json')
+
+def listadoSolicitud(request):
+    lista = serializers.serialize('json', Solicitud.objects.all())
+    return HttpResponse(lista, content_type='application/json')
 
 def index_adopcion(request):
     return HttpResponse("Adopciones")
