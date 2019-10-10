@@ -16,6 +16,6 @@ class Persona(models.Model):
         return '{} {}'.format(self.nombre, self.apellido)
 
 class Solicitud(models.Model):
-    persona = models.ForeignKey(Persona, null=True, blank=True, on_delete=models.CASCADE)
+    persona = models.ForeignKey(Persona, null=True, blank=True, on_delete=models.SET_NULL)
     numero_mascotas = models.IntegerField()
     razones = models.TextField()

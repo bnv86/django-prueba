@@ -1,4 +1,5 @@
 from django import forms
+from django.forms import ModelForm
 from apps.adopcion.models import Persona, Solicitud
 
 class PersonaForm(forms.ModelForm):

@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.forms import ModelForm
 from apps.adopcion.models import Persona, Solicitud
 from apps.adopcion.forms import PersonaForm, SolicitudForm
 from django.urls import reverse_lazy
@@ -56,18 +57,18 @@ class SolicitudUpdate(UpdateView):
     #sobreescribir los metodos de las vistas basadas en clases (get_context_data)
     def get_context_data(self, **kwargs):
         #self.object = self.get_object
-        contexto = super(SolicitudUpdate, self).get_context_data(**kwargs)
+        context = super(SolicitudUpdate, self).get_context_data(**kwargs)
         pk = self.kwargs.get('pk', 0)
         solicitud = self.model1.objects.get(id=pk)
         persona = self.model2.objects.get(id=solicitud.persona_id)
-        if 'form1' not in contexto:
-            contexto['form1'] = self.form_class1()
-        if 'form2' not in contexto:
-            contexto['form2'] = self.form_class2(instance=persona)
-        contexto['id'] = pk
-        return contexto
+        if 'form1' not in context:
+            context['form1'] = self.form_class1()
+        if 'form2' not in context:
+            context['form2'] = self.form_class2(instance=persona)
+        context['id'] = pk
+        return context
 
-    def post_data(self, request, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
         self.object = self.get_object()
         id_solicitud = kwargs['pk']
         solicitud = self.model1.objects.get(id=id_solicitud)
@@ -80,6 +81,55 @@ class SolicitudUpdate(UpdateView):
             return HttpResponseRedirect(self.get_success_url())
         else:
             return HttpResponseRedirect(self.get_success_url())
+
+"""
+class RecipeUpdateView(UpdateView):
+    template_name = 'adopcion/form.html'
+    model = Recipe
+    form_class = RecipeForm
+
+    def get_success_url(self):
+        self.success_url = '/account/dashboard/'
+        return self.success_url
+
+    def get_context_data(self, **kwargs):
+        context = super(RecipeUpdateView, self).get_context_data(**kwargs)
+        if self.request.POST:
+            context['form'] = RecipeForm(self.request.POST, instance=self.object)
+            context['ingredient_form'] = IngredientFormSet(self.request.POST, instance=self.object)
+            context['instruction_form'] = InstructionFormSet(self.request.POST, instance=self.object)
+        else:
+            context['form'] = RecipeForm(instance=self.object)
+            context['ingredient_form'] = IngredientFormSet(instance=self.object)
+            context['instruction_form'] = InstructionFormSet(instance=self.object)
+        return context
+
+    def post(self, request, *args, **kwargs):
+        self.object = None
+        form_class = self.get_form_class()
+        form = self.get_form(form_class)
+        ingredient_form = IngredientFormSet(self.request.POST)
+        instruction_form = InstructionFormSet(self.request.POST)
+        if (form.is_valid() and ingredient_form.is_valid() and
+            instruction_form.is_valid()):
+            return self.form_valid(form, ingredient_form, instruction_form)
+        else:
+            return self.form_invalid(form, ingredient_form, instruction_form)
+
+    def form_valid(self, form, ingredient_form, instruction_form):
+        self.object = form.save()
+        ingredient_form.instance = self.object
+        ingredient_form.save()
+        instruction_form.instance = self.object
+        instruction_form.save()
+        return HttpResponseRedirect(self.get_success_url())
+
+    def form_invalid(self, form, ingredient_form, instruction_form):
+        return self.render_to_response(
+            self.get_context_data(form=form,
+                                  ingredient_form=ingredient_form,
+                                  instruction_form=instruction_form))
+"""
 
 class SolicitudDelete(DeleteView):
     model = Solicitud
