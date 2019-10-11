@@ -32,6 +32,7 @@ urlpatterns = [
     path('adopcion/', include ('apps.adopcion.urls'), name='adopcion'),
     path('solicitud/', include ('apps.adopcion.urls'), name='solicitud'),
     path('usuario/', include ('apps.usuario.urls'), name='usuario'),
+    #url(r'^registrar$', RegistroUsuario.as_view(), name='registrar'),
     #path('usuario/', include('django.contrib.auth.urls')), #TODAS LAS URL
     path('logout/', logout_then_login, name='logout'),
     path('accounts/login/', LoginView.as_view(template_name='usuario/index.html'), name='login'),
@@ -39,6 +40,7 @@ urlpatterns = [
     path('reset/password_reset_done', PasswordResetDoneView.as_view(template_name='registration/password_reset_done.html'), name='password_reset_done'),
     path('reset/<uidb64>/<token>/', PasswordResetConfirmView.as_view(template_name='registration/password_reset_confirm.html'), name='password_reset_confirm'),
     path('reset/done', PasswordResetCompleteView.as_view(template_name='registration/password_reset_complete.html'), name='password_reset_complete'),
+    path('api-auth/', include('rest_framework.urls')),
 
     path('bootstrap/', TemplateView.as_view(template_name='bootstrap/example.html')),
 ]
