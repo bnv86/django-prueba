@@ -1,6 +1,8 @@
 import json
 from rest_framework.views import APIView
 from django.shortcuts import render, redirect
+from django.contrib import messages
+from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic import CreateView

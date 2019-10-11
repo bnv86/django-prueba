@@ -1,5 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib import messages
+from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.forms import ModelForm
 from apps.adopcion.models import Persona, Solicitud
@@ -26,13 +28,14 @@ class SolicitudList(ListView):
     template_name = 'adopcion/list.html'
     paginate_by = 5
 
-class SolicitudCreate(CreateView):
+class SolicitudCreate(SuccessMessageMixin, CreateView):
     fields = '__all__'
     model = Solicitud
     form_class1 = SolicitudForm
     form_class2 = PersonaForm
     template_name = 'adopcion/form_old.html'
     success_url = reverse_lazy('solicitud_listar')
+    success_message = "La solicitud ha sido generada con éxito!"
 
     #sobreescribir los metodos de las vistas basadas en clases (get_context_data)
     def get_context_data(self, **kwargs):
@@ -55,7 +58,7 @@ class SolicitudCreate(CreateView):
         else:
             return self.render_to_response(self.get_context_data(form1=form1, form2=form2))
 
-class SolicitudUpdate(UpdateView):
+class SolicitudUpdate(SuccessMessageMixin, UpdateView):
     #fields = '__all__'
     model = Solicitud
     model2 = Persona
@@ -63,6 +66,7 @@ class SolicitudUpdate(UpdateView):
     second_form_class = PersonaForm
     template_name = 'adopcion/form_old.html'
     success_url = reverse_lazy('solicitud_listar')
+    success_message = "La solicitud ha sido modificada con éxito!"
 
     """
     #sobreescribir los metodos de las vistas basadas en clases (get_context_data)
@@ -94,6 +98,19 @@ class SolicitudUpdate(UpdateView):
         else:
             return HttpResponseRedirect(self.get_success_url())
 """
+
+class SolicitudDelete(SuccessMessageMixin, DeleteView):
+    model = Solicitud
+    template_name = 'adopcion/delete.html'
+    success_url = reverse_lazy('solicitud_listar')
+    success_message = "La solicitud ha sido eliminada con éxito!"
+
+    def delete(self, request, *args, **kwargs):
+        obj = self.get_object()
+        messages.success(self.request, self.success_message % obj.__dict__)
+        return super(SolicitudDelete, self).delete(request, *args, **kwargs)
+
+
 """
 class RecipeUpdateView(UpdateView):
     template_name = 'adopcion/form.html'
@@ -142,8 +159,3 @@ class RecipeUpdateView(UpdateView):
                                   ingredient_form=ingredient_form,
                                   instruction_form=instruction_form))
 """
-
-class SolicitudDelete(DeleteView):
-    model = Solicitud
-    template_name = 'adopcion/delete.html'
-    success_url = reverse_lazy('solicitud_listar')
