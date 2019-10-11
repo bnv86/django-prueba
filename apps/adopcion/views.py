@@ -24,13 +24,14 @@ class SolicitudList(ListView):
     #fields = '__all__'
     model = Solicitud
     template_name = 'adopcion/list.html'
+    paginate_by = 5
 
 class SolicitudCreate(CreateView):
     fields = '__all__'
     model = Solicitud
     form_class1 = SolicitudForm
     form_class2 = PersonaForm
-    template_name = 'adopcion/form.html'
+    template_name = 'adopcion/form_old.html'
     success_url = reverse_lazy('solicitud_listar')
 
     #sobreescribir los metodos de las vistas basadas en clases (get_context_data)
@@ -55,15 +56,17 @@ class SolicitudCreate(CreateView):
             return self.render_to_response(self.get_context_data(form1=form1, form2=form2))
 
 class SolicitudUpdate(UpdateView):
-    fields = '__all__'
-    model1 = Solicitud
+    #fields = '__all__'
+    model = Solicitud
     model2 = Persona
-    form_class1 = SolicitudForm
-    form_class2 = PersonaForm
-    template_name = 'adopcion/form.html'
-    #success_url = reverse_lazy('solicitud_listar')
+    form_class = SolicitudForm
+    second_form_class = PersonaForm
+    template_name = 'adopcion/form_old.html'
+    success_url = reverse_lazy('solicitud_listar')
 
+    """
     #sobreescribir los metodos de las vistas basadas en clases (get_context_data)
+    #ESTO NO ESTÁ FUNCIONANDO EN EL GET DEBIDO AL USO DE LOS 2 FORMULARIOS
     def get_context_data(self, **kwargs):
         #self.object = self.get_object
         context = super(SolicitudUpdate, self).get_context_data(**kwargs)
@@ -90,7 +93,7 @@ class SolicitudUpdate(UpdateView):
             return HttpResponseRedirect(self.get_success_url())
         else:
             return HttpResponseRedirect(self.get_success_url())
-
+"""
 """
 class RecipeUpdateView(UpdateView):
     template_name = 'adopcion/form.html'

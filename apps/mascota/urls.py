@@ -9,7 +9,7 @@ urlpatterns = [
     url(r'^$', index_mascota, name='index_mascota'),
     #vistas basadas en clases
     url(r'^nueva$', login_required(MascotaCreate.as_view()), name='mascota_crear'),
-    url(r'^listar$', login_required(MascotaList.as_view()), name='mascota_listar'),
+    url(r'^listar', login_required(MascotaList.as_view()), name='mascota_listar'),
     url(r'^editar/(?P<pk>\d+)/$', login_required(MascotaUpdate.as_view()), name='mascota_editar'),
     url(r'^eliminar/(?P<pk>\d+)/$', login_required(MascotaDelete.as_view()), name='mascota_eliminar'),
     url(r'^listado$', login_required(listado), name='listado'),

@@ -58,6 +58,7 @@ def mascota_delete(request, id_mascota):
 class MascotaList(ListView):
     model = Mascota
     template_name = 'mascota/list.html'
+    paginate_by = 5
 
 class MascotaCreate(CreateView):
     model = Mascota

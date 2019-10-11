@@ -21,8 +21,8 @@
             <td>{{ solicitud.numero_mascotas }}</td>
             <td>{{ solicitud.razones }}</td>
             <td>
-                <a class="btn btn-primary" href="#">Editar</a>
-                <a class="btn btn-danger" href="#">Eliminar</a>
+                <a class="btn btn-primary" href="{% url 'solicitud_editar' solicitud.id %}">Editar</a>
+                <a class="btn btn-danger" href="{% url 'solicitud_eliminar' solicitud.id %}">Eliminar</a>
             </td>
         </tr>
         {% endfor %}
@@ -33,5 +33,18 @@
 
     </tbody>
 </table>
+
+<ul class="pager">
+    <li>
+        {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}">Previa</a>
+        {% endif %}
+    </li>
+    <li>
+        {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">Siguiente</a>
+        {% endif %}
+    </li>
+</ul>
 
 {% endblock %}
