@@ -17,4 +17,16 @@ si entra bien, luego a localhost:8000/admin
 
 en la pc de la muni apache corre con 82 y 4432
 
+#IMAGENES
+instalar fuera del entorno virtual:
+pip install Pillow
+python import PILL
+exit()
+
+en codigo importar:
+from PIL import Image, entre otros
+
+
+
+
 
