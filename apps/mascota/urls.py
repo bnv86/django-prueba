@@ -12,7 +12,10 @@ urlpatterns = [
     url(r'^listar', login_required(MascotaList.as_view()), name='mascota_listar'),
     url(r'^editar/(?P<pk>\d+)/$', login_required(MascotaUpdate.as_view()), name='mascota_editar'),
     url(r'^eliminar/(?P<pk>\d+)/$', login_required(MascotaDelete.as_view()), name='mascota_eliminar'),
+
+    #API
     url(r'^listado$', login_required(listado), name='listado'),
+]
 
     #vistas basadas en funciones
     #url(r'^listar$', mascota_list, name='mascota_listar'),
@@ -21,4 +24,3 @@ urlpatterns = [
     #url(r'^eliminar/(?P<id_mascota>\d+)/$', mascota_delete, name='mascota_eliminar'),
 
     #url(r'^bootstrap/$', TemplateView.as_view(template_name='bootstrap/example.html')),
-]

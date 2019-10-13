@@ -5,6 +5,18 @@
 
 {% block content %}
 
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <h1>Registro de Usuario</h1>
+    </div>
+</div>
+    
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <h1> </h1>
+    </div>
+</div>
+
 <form method="post">
     {% csrf_token %}
     <div class="row">
@@ -61,5 +73,6 @@
         </div>
     </div>
 </form>
+
 
 {% endblock %}

@@ -35,7 +35,7 @@ urlpatterns = [
     #url(r'^registrar$', RegistroUsuario.as_view(), name='registrar'),
     #path('usuario/', include('django.contrib.auth.urls')), #TODAS LAS URL
     path('logout/', logout_then_login, name='logout'),
-    path('accounts/login/', LoginView.as_view(template_name='usuario/index.html'), name='login'),
+    path('accounts/login/', LoginView.as_view(template_name='usuario/login.html'), name='login'),
     path('reset/password_reset', PasswordResetView.as_view(template_name='registration/password_reset_form.html'), name='password_reset'), #, 'email_template_name':'registration/password_reset_email.html'
     path('reset/password_reset_done', PasswordResetDoneView.as_view(template_name='registration/password_reset_done.html'), name='password_reset_done'),
     path('reset/<uidb64>/<token>/', PasswordResetConfirmView.as_view(template_name='registration/password_reset_confirm.html'), name='password_reset_confirm'),

@@ -59,16 +59,16 @@ class SolicitudCreate(SuccessMessageMixin, CreateView):
             return self.render_to_response(self.get_context_data(form1=form1, form2=form2))
 
 class SolicitudUpdate(SuccessMessageMixin, UpdateView):
-    #fields = '__all__'
-    model = Solicitud
+    fields = '__all__'
+    model1 = Solicitud
     model2 = Persona
-    form_class = SolicitudForm
-    second_form_class = PersonaForm
+    form_class1 = SolicitudForm
+    form_class2 = PersonaForm
     template_name = 'adopcion/form_old.html'
     success_url = reverse_lazy('solicitud_listar')
     success_message = "La solicitud ha sido modificada con éxito!"
 
-    """
+
     #sobreescribir los metodos de las vistas basadas en clases (get_context_data)
     #ESTO NO ESTÁ FUNCIONANDO EN EL GET DEBIDO AL USO DE LOS 2 FORMULARIOS
     def get_context_data(self, **kwargs):
@@ -97,7 +97,7 @@ class SolicitudUpdate(SuccessMessageMixin, UpdateView):
             return HttpResponseRedirect(self.get_success_url())
         else:
             return HttpResponseRedirect(self.get_success_url())
-"""
+
 
 class SolicitudDelete(SuccessMessageMixin, DeleteView):
     model = Solicitud
@@ -105,6 +105,7 @@ class SolicitudDelete(SuccessMessageMixin, DeleteView):
     success_url = reverse_lazy('solicitud_listar')
     success_message = "La solicitud ha sido eliminada con éxito!"
 
+    #con esto se emite el success_message
     def delete(self, request, *args, **kwargs):
         obj = self.get_object()
         messages.success(self.request, self.success_message % obj.__dict__)
