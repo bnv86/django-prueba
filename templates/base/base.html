@@ -68,6 +68,7 @@
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" id="pills-opciones-tab" data-toggle="dropdown" href="#" role="button" aria-controls="pills-contact" aria-selected="false">{{ user.get_username }}</a>
             <div class="dropdown-menu">
+              <a class="dropdown-item" href="{% url 'profile' %}">Perfil</a>
               <a class="dropdown-item" href="{% url 'logout' %}">Salir</a>
             </div>
           </li>

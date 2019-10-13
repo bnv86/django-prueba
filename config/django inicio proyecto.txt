@@ -24,7 +24,10 @@ python import PILL
 exit()
 
 en codigo importar:
-from PIL import Image, entre otros
+from PIL import Image, ImageFilter, entre otros
+
+https://pillow.readthedocs.io/en/stable/reference/ImageFilter.html
+
 
 
 
