@@ -8,7 +8,7 @@ class Vacuna(models.Model):
     nombre = models.CharField(max_length=50)
 
     def __str__(self):
-        #esto es para que retorne el nombre de la vacuna, no el objeto
+        #esto es para que retorne el nombre de la vacuna en administracion (no el objeto)
         return '{}'.format(self.nombre)
 
 class Mascota(models.Model):
@@ -23,4 +23,8 @@ class Mascota(models.Model):
 
     #ATRIBUTO QUE RELACIONA LOS DOS MODELOS (Mascota/Vacuna)
     vacuna = models.ManyToManyField(Vacuna, blank=True)
+
+    def __str__(self):
+        #esto es para que retorne el nombre de la mascota en administracion (no el objeto)
+        return '{}'.format(self.nombre)
 

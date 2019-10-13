@@ -20,7 +20,7 @@ from django.urls import path
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView
-from django.contrib.auth.views import LoginView, logout_then_login, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
+from django.contrib.auth.views import LoginView, logout_then_login, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView, LogoutView
 #password_reset, password_reset_done, password_reset_confirm, password_reset_complete
 
 
@@ -34,6 +34,7 @@ urlpatterns = [
     path('usuario/', include ('apps.usuario.urls'), name='usuario'),
     #url(r'^registrar$', RegistroUsuario.as_view(), name='registrar'),
     #path('usuario/', include('django.contrib.auth.urls')), #TODAS LAS URL
+    #path('logout/', LogoutView.as_view(template_name='usuario/login.html'), name='logout'),
     path('logout/', logout_then_login, name='logout'),
     path('accounts/login/', LoginView.as_view(template_name='usuario/login.html'), name='login'),
     path('reset/password_reset', PasswordResetView.as_view(template_name='registration/password_reset_form.html'), name='password_reset'), #, 'email_template_name':'registration/password_reset_email.html'

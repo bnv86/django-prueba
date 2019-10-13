@@ -19,3 +19,11 @@ class Solicitud(models.Model):
     persona = models.ForeignKey(Persona, null=True, blank=True, on_delete=models.SET_NULL)
     numero_mascotas = models.IntegerField()
     razones = models.TextField()
+
+    def __str__(self):
+        #esto es para que retorne el nombre completo de la persona y el id de la solicitud en lugar del objeto
+        if ('{}'.format(self.persona) == 'None'):
+            return '{}'.format(self.id) + ' de ' + 'ANONIMO'
+        else:
+            return '{}'.format(self.id) + ' de ' + '{}'.format(self.persona)
+        
