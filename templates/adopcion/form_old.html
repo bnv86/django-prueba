@@ -5,8 +5,7 @@
 
     {% csrf_token %}
     
-    {{ form1.as_p }}
-    {{ form2.as_p }}
+    {{ form.as_p }}
     
     <button type="submit">Guardar</button>
 
@@ -14,5 +13,5 @@
 
 {% endblock %}
 
-<!-- {{ form.nombre }} 
+<!-- {{ form1.nombre }} 
     {{ form2.as_p }} -->
