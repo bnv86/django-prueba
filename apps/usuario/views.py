@@ -1,14 +1,14 @@
 import json
 from rest_framework.views import APIView
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm #PasswordChangeForm, UserChangeForm
 #from registration.signals import user_registered
 from django.contrib.auth.decorators import login_required
-from django.views.generic import CreateView, UpdateView, DetailView
+from django.views.generic import CreateView, UpdateView, DetailView, View
 from django.contrib.auth.views import LogoutView
 from django.urls import reverse_lazy, reverse
 from apps.usuario.forms import RegistroForm, UserEditForm, profileForm
@@ -55,7 +55,7 @@ class UpdateUserView(UpdateView):
 """
 
 @login_required
-def profile(request):
+def profileUpdate(request):
     """
     if request.method == 'POST':
         form = profileForm(data=request.POST, instance=request.user)
@@ -84,7 +84,50 @@ def profile(request):
         #SuccessMessageMixin.success_message = "%(username)s ha sido modificado con éxito!"
         messages.add_message(request, messages.SUCCESS, 'Ha modificado el perfil correctamente')
         return redirect('solicitud_listar')
-    return render(request, 'usuario/profile.html', {'form':form})
+    return render(request, 'usuario/profile_update.html', {'form':form})
+
+"""
+class UsuarioDetail(View):
+    def get(self, request, *args, **kwargs):
+        user = get_object_or_404(User, pk=kwargs['pk'])
+        context = {'user': user}
+        return render(request, 'usuario/profile_detail.html', context)
+"""
+
+#class UsuarioDetail(DetailView):
+
+    #queryset = User.objects.all()
+
+    #def get_object(self):
+        #obj = super().get_object()
+        # Record the last accessed date
+        #obj.last_accessed = timezone.now()
+        #obj.save()
+        #return obj
+
+    #model = User
+    #user_ide = User.objects.get(id=user_id)
+    #queryset = Book.objects.filter(is_published=True)
+    #form = profileForm(instance=model.id)
+    #template_name = 'usuario/profile_detail.html'
+    #success_url = reverse_lazy('solicitud_listar')
+    #def get_success_url(self):
+        #return reverse_lazy('facture_consulter',kwargs={'pk': self.get_object().id})
+        #print('ID: '+ self.get_object().id)
+        #return get_object_or_404(User, kwargs={'pk': self.get_object().id})
+    
+    #def get_object(self):
+        #return get_object_or_404(User, pk=session['user_id'])
+        #return get_object_or_404(User, kwargs={'pk': self.get_object().id})
+    
+    #def get_object(self):
+
+        #return get_object_or_404(User, pk=self.get_object().id)
+
+    #def get_queryset(self):
+    		#if self.request.user.is_authenticated:
+			    #return self.get_object().id
+
 
 #falta que tome el user id para que funcione
 class UsuarioUpdate(SuccessMessageMixin, UpdateView):
