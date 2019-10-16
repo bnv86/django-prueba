@@ -1,59 +1,100 @@
 {% extends 'base/base.html' %}
 
 {% block content %}
+<div class="row">
+    <div class="col-md-8 col-md-offset-4">
+        <a style="float:right; color:blue;" href="{{request.META.HTTP_REFERER}}" class="btn">Volver</a>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-8 col-md-offset-0">
+        <h1>Complete su solicitud</h1>
+    </div>
+</div>
+
 <form method="post">
 
     {% csrf_token %}
+    
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="form-group">
+                <label>Persona</label>
+                {% if object_list %}
+                {% for solicitud in object_list %}
+                <a>{{ form.nombre.name }}</a>
+                {% endfor %}
+        
+                {% else %}
+                <h1> No hay registros de solicitudes</h1>
+                {% endif %}
+                <select class="form-control" type="text" name="nombre" value='{{ persona.nombre }}'>{{ solicitud.persona.nombre }}</select>
+            </div>
+        </div>
+    </div>
 
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="form-group">
-                <label for="{{ form2.nombre.name }}">{{ form2.nombre.label }}</label>
-                {{ form2.nombre }}
+                <label for="{{ form.nombre.name }}">{{ form.nombre.label }}</label>
+                {{ solicitud.nombre }}
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
             <div class="form-group">
-                <label for="{{ form2.apellido.name }}">{{ form2.apellido.label }}</label>
-                {{ form2.apellido }}
-            </div>
-        </div>
-        <div class="col-md-8 col-md-offset-2">
-            <div class="form-group">
-                <label for="{{ form2.email.name }}">{{ form2.email.label }}</label>
-                {{ form2.email }}
-            </div>
-        </div>   
-        <div class="col-md-8 col-md-offset-2">
-            <div class="form-group">
-                <label for="{{ form2.telefono.name }}">{{ form2.telefono.label }}</label>
-                {{ form2.telefono }}
-            </div>
-        </div>     
-        <div class="col-md-8 col-md-offset-2">
-            <div class="form-group">
-                <label for="{{ form2.domicilio.name }}">{{ form2.domicilio.label }}</label>
-                {{ form2.domicilio }}
-            </div>
-        </div>
-        <div class="col-md-8 col-md-offset-2">
-            <div class="form-group">
-                <label for="{{ form1.numero_mascotas.name }}">{{ form1.numero_mascotas.label }}</label>
-                {{ form1.numero_mascotas }}
-            </div>
-        </div>
-        <div class="col-md-8 col-md-offset-2">
-            <div class="form-group">
-                <label for="{{ form1.razones.name }}">{{ form1.razones.label }}</label>
-                {{ form1.razones }}
+                <label for="{{ form.apellido.name }}">{{ persona.apellido.label }}</label>
+                {{ form.persona.apellido.label }}
             </div>
         </div>
     </div>
-    <div class="col-md-8 col-md-offset-2">
-        <div class="form-group">
-            <button class="btn btn-primary" type="submit">Guardar</button>
+
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="form-group">
+                <label>Cantidad de mascotas</label>
+                <input class="form-control" type="number" min="1" max="5" name="numero_mascotas" value='{{ persona.numero_mascotas }}'>
+            </div>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="form-group">
+                <label>Razones de adopción</label>
+                <textarea class="form-control" rows="3" name="razones" value='{{ persona.razones }}'></textarea>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="form-group">
+                <button class="btn btn-primary" type="submit">Guardar</button>
+            </div>
+        </div>
+    </div>
+
 </form>
 
 {% endblock %}
+
+<!--
+    
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="form-group">
+                <label for="{{ form.numero_mascotas.name }}">{{ form.numero_mascotas.label }}</label>
+                {{ form.numero_mascotas }}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="form-group">
+                <label for="{{ form.razones.name }}">{{ form.razones.label }}</label>
+                {{ form.razones }}
+            </div>
+        </div>
+    </div>
+
+-->

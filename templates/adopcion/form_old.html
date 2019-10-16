@@ -1,13 +1,24 @@
 {% extends 'base/base.html' %}
 
 {% block content %}
+<div class="row">
+    <div class="col-md-8 col-md-offset-4">
+        <a style="float:right; color:blue;" href="{{request.META.HTTP_REFERER}}" class="btn">Volver</a>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-8 col-md-offset-0">
+        <h1>Complete su solicitud</h1>
+    </div>
+</div>
+
 <form method="post">
 
     {% csrf_token %}
     
     {{ form.as_p }}
     
-    <button type="submit">Guardar</button>
+    <button class="btn btn-primary" type="submit">Guardar</button>
 
 </form>
 

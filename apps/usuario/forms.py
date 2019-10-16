@@ -24,6 +24,7 @@ class RegistroForm(UserCreationForm):
         }
 
 class profileForm(forms.ModelForm):
+
     class Meta:
         model = User
         fields = [
@@ -40,6 +41,7 @@ class profileForm(forms.ModelForm):
         }
 
 class passwordForm(forms.ModelForm):
+    
     class Meta:
         model = User
         fields = [

@@ -15,9 +15,6 @@ from django.urls import reverse_lazy, reverse
 
 # Create your models here.
 
-
-
-
 """
 class User(AbstractUser):    
     middle_name = models.CharField(max_length=50, blank=True, null=True)

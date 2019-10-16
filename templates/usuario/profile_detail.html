@@ -4,6 +4,7 @@
 
 <div class="row">
     <div class="col-md-8 col-md-offset-2">
+        <a style="float:right; color:blue;" href="{{request.META.HTTP_REFERER}}" class="btn">Volver</a>
         <h1>Perfil de Usuario</h1>
     </div>
 </div>
@@ -14,83 +15,50 @@
     </div>
 </div>
 
-<form method="post">
-    {% csrf_token %}
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="form-group">
-                <label>Nombre</label>
-                <a class="form-control" type="text" name="first_name"></a>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="form-group">
-                <label>Apellido</label>
-                <input class="form-control" type="text" name="last_name">
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="form-group">
-                <label>Nombre de usuario</label>
-                <input class="form-control" type="text" name="username">
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="form-group">
-                <label>Correo</label>
-                <input class="form-control" type="text" name="email">
-            </div>
-        </div>
-    </div>
+<div class="row">
     <div class="col-md-8 col-md-offset-2">
         <div class="form-group">
-            <button class="btn btn-primary" href="{% url 'login' %}" type="submit">Actualizar Perfil</button>
+            <h4>Nombre de Usuario: {{ user.username }}</h4>
         </div>
     </div>
+</div>
+<div class="row">
     <div class="col-md-8 col-md-offset-2">
         <div class="form-group">
-            <button class="btn btn-primary" href="{% url 'login' %}" type="submit">Actualizar Contraseña</button>
+            <h4>Nombre: {{ user.first_name }}</h4>
         </div>
     </div>
-</form>
+</div>
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="form-group">
+            <h4>Apellido: {{ user.last_name }}</h4>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="form-group">
+            <h4>Correo: {{ user.email }}</h4>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <h1> </h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="form-group">
+            <a href="{% url 'profile_update_old' %}">Actualizar Perfil</a>
+            <a style=float:right; href="{% url 'solicitud_listar' %}">Actualizar Contraseña</a>
+        </div>
+    </div>
+</div>
 
 {% endblock %}
 
-
-
-
-
-
-
-<!--
-{% extends "base/base.html" %}
-{% load staticfiles %}
-{% load static %}
-{% block extrahead %}
-<style type="text/css">
-    .img{
-        margin-left: 20%;
-        border-radius: 8px;
-    }
-    h3{
-        text-align: center;
-    }
-</style>
-{% endblock extrahead %}
-{% block content %}
-<div id="contenido">
-    {% if object.avatar %}
-    <img class="img" src="{{object.avatar.url}}" height=300" />
-    {% endif %}
-    <h2>{{ object.first_name }} {{object.last_name}}</h2>
-    <h3>Correo: {{object.email}}</h3>
-    <a href="{% url 'solicitud_listar' %}" class="btn">Volver</a>
-</div>
-{% endblock content %} 
--->

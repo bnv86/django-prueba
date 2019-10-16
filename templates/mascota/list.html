@@ -1,6 +1,16 @@
 {% extends 'base/base.html' %}
 
 {% block content %}
+<div class="row">
+    <div class="col-md-8 col-md-offset-4">
+        <a style="float:right; color:blue;" href="{{request.META.HTTP_REFERER}}" class="btn">Volver</a>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-8 col-md-offset-0">
+        <h1>Mascotas</h1>
+    </div>
+</div>
 
 <table class="table table-bordered">
     <thead>

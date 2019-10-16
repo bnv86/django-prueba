@@ -3,6 +3,7 @@
 {% block content %}
 <div class="row">
     <div class="col-md-8 col-md-offset-2">
+        <a style="float:right; color:blue;" href="{% url 'profile_detail' %}" class="btn">Volver</a>
         <h1>Actualizar Usuario</h1>
     </div>
 </div>
@@ -13,9 +14,47 @@
     </div>
 </div>
 
-<form action="." method="post">
+<form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button button class="btn btn-primary" type="submit">Guardar Perfil</button>
+
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="form-group">
+                <label>Nombre de usuario</label>
+                <input class="form-control" type="text" name="username" value='{{ user.username }}'>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="form-group">
+                <label>Nombre</label>
+                <input class="form-control" type="text" name="first_name" value='{{ user.first_name }}'>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="form-group">
+                <label>Apellido</label>
+                <input class="form-control" type="text" name="last_name" value='{{ user.last_name }}'>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="form-group">
+                <label>Correo</label>
+                <input class="form-control" type="text" name="email" value='{{ user.email }}'>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="form-group">
+                <button button class="btn btn-primary" type="submit">Guardar Perfil</button>
+            </div>
+        </div>
+    </div>
 </form>
 {% endblock %}

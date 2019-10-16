@@ -1,0 +1,59 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+<form method="post">
+
+    {% csrf_token %}
+
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="form-group">
+                <label for="{{ form2.nombre.name }}">{{ form2.nombre.label }}</label>
+                {{ form2.nombre }}
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+            <div class="form-group">
+                <label for="{{ form2.apellido.name }}">{{ form2.apellido.label }}</label>
+                {{ form2.apellido }}
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+            <div class="form-group">
+                <label for="{{ form2.email.name }}">{{ form2.email.label }}</label>
+                {{ form2.email }}
+            </div>
+        </div>   
+        <div class="col-md-8 col-md-offset-2">
+            <div class="form-group">
+                <label for="{{ form2.telefono.name }}">{{ form2.telefono.label }}</label>
+                {{ form2.telefono }}
+            </div>
+        </div>     
+        <div class="col-md-8 col-md-offset-2">
+            <div class="form-group">
+                <label for="{{ form2.domicilio.name }}">{{ form2.domicilio.label }}</label>
+                {{ form2.domicilio }}
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+            <div class="form-group">
+                <label for="{{ form1.numero_mascotas.name }}">{{ form1.numero_mascotas.label }}</label>
+                {{ form1.numero_mascotas }}
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+            <div class="form-group">
+                <label for="{{ form1.razones.name }}">{{ form1.razones.label }}</label>
+                {{ form1.razones }}
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8 col-md-offset-2">
+        <div class="form-group">
+            <button class="btn btn-primary" type="submit">Guardar</button>
+        </div>
+    </div>
+</form>
+
+{% endblock %}

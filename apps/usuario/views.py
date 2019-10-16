@@ -8,7 +8,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm #PasswordChangeForm, UserChangeForm
 #from registration.signals import user_registered
 from django.contrib.auth.decorators import login_required
-from django.views.generic import CreateView, UpdateView, DetailView, View
+from django.views.generic import CreateView, UpdateView, View
+from django.views.generic.detail import DetailView
 from django.contrib.auth.views import LogoutView
 from django.urls import reverse_lazy, reverse
 from apps.usuario.forms import RegistroForm, UserEditForm, profileForm
@@ -35,45 +36,9 @@ class UsuarioRegister(SuccessMessageMixin, CreateView):
     # en algun momento tengo que cambiar esto, para que primero envie un mail de confirmacion como en password_reset
     success_message = "%(username)s ha sido registrado con éxito!"
 
-"""
-class UsuarioUpdate(SuccessMessageMixin, UpdateView):
-    model = User
-    template_name = 'usuario/perfil.html'
-    form_class = UserEditForm #UserChangeForm
-    success_url = reverse_lazy('solicitud_listar')
-    # en algun momento tengo que cambiar esto, para que primero envie un mail de confirmacion como en password_reset
-    success_message = "%(username)s ha sido modificado con éxito!"
-"""
-
-
-"""
-class UpdateUserView(UpdateView):
-    model = User
-    form_class = UserForm
-    template_name = 'usuario/perfil.html'
-    success_url = reverse_lazy('solicitud_listar')
-"""
 
 @login_required
-def profileUpdate(request):
-    """
-    if request.method == 'POST':
-        form = profileForm(data=request.POST, instance=request.user)
-    if form.is_valid():
-        form.save()
-        return redirect('somewhere')
-    
-    if request.method == 'POST':
-        form = profileForm(data=request.POST, instance=request.user)
-        update = form.save(commit=False)
-        update.user = request.user
-        update.save()
-    else:
-        form = profileForm(instance=request.user)
-
-    return render(request, 'usuario/profile.html', {'form': form})
-    """
-
+def profile_update(request):
     #usuario = User.objects.get(id=id_user)
     if request.method == 'GET':
         form = profileForm(instance=request.user)
@@ -83,51 +48,25 @@ def profileUpdate(request):
             form.save()
         #SuccessMessageMixin.success_message = "%(username)s ha sido modificado con éxito!"
         messages.add_message(request, messages.SUCCESS, 'Ha modificado el perfil correctamente')
-        return redirect('solicitud_listar')
+        return redirect('profile_detail')
     return render(request, 'usuario/profile_update.html', {'form':form})
 
-"""
-class UsuarioDetail(View):
-    def get(self, request, *args, **kwargs):
-        user = get_object_or_404(User, pk=kwargs['pk'])
-        context = {'user': user}
-        return render(request, 'usuario/profile_detail.html', context)
-"""
+@login_required
+def profile_detail(request):
+    usuario = User.objects.all()
+    contexto = {'users':usuario}
+    return render(request, 'usuario/profile_detail.html', contexto)
 
-#class UsuarioDetail(DetailView):
 
-    #queryset = User.objects.all()
-
-    #def get_object(self):
-        #obj = super().get_object()
-        # Record the last accessed date
-        #obj.last_accessed = timezone.now()
-        #obj.save()
-        #return obj
-
-    #model = User
-    #user_ide = User.objects.get(id=user_id)
-    #queryset = Book.objects.filter(is_published=True)
-    #form = profileForm(instance=model.id)
+def usuarioDetail(request, user_id):
+    lista = serializers.serialize('json', User.objects.all(), fields=['username', 'email', 'first_name', 'last_name'])
+    return HttpResponse(lista, content_type='application/json')
+    #usuario = User.objects.get(id=user_id)
     #template_name = 'usuario/profile_detail.html'
-    #success_url = reverse_lazy('solicitud_listar')
-    #def get_success_url(self):
-        #return reverse_lazy('facture_consulter',kwargs={'pk': self.get_object().id})
-        #print('ID: '+ self.get_object().id)
-        #return get_object_or_404(User, kwargs={'pk': self.get_object().id})
+    #return render(request, template_name)
+    #model = User
+    #queryset = User.objects.all()
     
-    #def get_object(self):
-        #return get_object_or_404(User, pk=session['user_id'])
-        #return get_object_or_404(User, kwargs={'pk': self.get_object().id})
-    
-    #def get_object(self):
-
-        #return get_object_or_404(User, pk=self.get_object().id)
-
-    #def get_queryset(self):
-    		#if self.request.user.is_authenticated:
-			    #return self.get_object().id
-
 
 #falta que tome el user id para que funcione
 class UsuarioUpdate(SuccessMessageMixin, UpdateView):
@@ -160,6 +99,25 @@ class UserAPI(APIView):
 
 
 
+
+"""
+class UsuarioUpdate(SuccessMessageMixin, UpdateView):
+    model = User
+    template_name = 'usuario/perfil.html'
+    form_class = UserEditForm #UserChangeForm
+    success_url = reverse_lazy('solicitud_listar')
+    # en algun momento tengo que cambiar esto, para que primero envie un mail de confirmacion como en password_reset
+    success_message = "%(username)s ha sido modificado con éxito!"
+"""
+
+
+"""
+class UpdateUserView(UpdateView):
+    model = User
+    form_class = UserForm
+    template_name = 'usuario/perfil.html'
+    success_url = reverse_lazy('solicitud_listar')
+"""
 
 
 
@@ -270,3 +228,45 @@ class DetailUserProfile(LoginRequiredMixin,DetailView):
     template_name = 'usuario/detail_userprofile.html'
 
 """
+
+"""
+class UsuarioDetail(View):
+    def get(self, request, *args, **kwargs):
+        user = get_object_or_404(User, pk=kwargs['pk'])
+        context = {'user': user}
+        return render(request, 'usuario/profile_detail.html', context)
+"""
+
+#class UsuarioDetail(DetailView):
+
+    #queryset = User.objects.all()
+
+    #def get_object(self):
+        #obj = super().get_object()
+        # Record the last accessed date
+        #obj.last_accessed = timezone.now()
+        #obj.save()
+        #return obj
+
+    #model = User
+    #user_ide = User.objects.get(id=user_id)
+    #queryset = Book.objects.filter(is_published=True)
+    #form = profileForm(instance=model.id)
+    #template_name = 'usuario/profile_detail.html'
+    #success_url = reverse_lazy('solicitud_listar')
+    #def get_success_url(self):
+        #return reverse_lazy('facture_consulter',kwargs={'pk': self.get_object().id})
+        #print('ID: '+ self.get_object().id)
+        #return get_object_or_404(User, kwargs={'pk': self.get_object().id})
+    
+    #def get_object(self):
+        #return get_object_or_404(User, pk=session['user_id'])
+        #return get_object_or_404(User, kwargs={'pk': self.get_object().id})
+    
+    #def get_object(self):
+
+        #return get_object_or_404(User, pk=self.get_object().id)
+
+    #def get_queryset(self):
+    		#if self.request.user.is_authenticated:
+			    #return self.get_object().id
