@@ -1,4 +1,6 @@
 from django.db import models
+from apps.usuario.models import User
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -10,20 +12,24 @@ class Persona(models.Model):
     telefono = models.CharField(max_length=12)
     email = models.EmailField()
     domicilio = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         #esto es para que retorne nombre y apellido en lugar del objeto
         return '{} {}'.format(self.nombre, self.apellido)
 
 class Solicitud(models.Model):
-    persona = models.ForeignKey(Persona, null=True, blank=True, on_delete=models.SET_NULL)
+    usuario = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
     numero_mascotas = models.IntegerField()
     razones = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         #esto es para que retorne el nombre completo de la persona y el id de la solicitud en lugar del objeto
-        if ('{}'.format(self.persona) == 'None'):
+        if ('{}'.format(self.usuario) == 'None'):
             return '{}'.format(self.id) + ' de ' + 'ANONIMO'
         else:
-            return '{}'.format(self.id) + ' de ' + '{}'.format(self.persona)
+            return '{}'.format(self.id) + ' de ' + '{}'.format(self.usuario)
         

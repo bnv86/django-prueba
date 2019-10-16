@@ -4,7 +4,7 @@ from helps import receivers
 #from __future__ import unicode_literals
 
 from django.db import models
-#from django.contrib.auth.models import User
+from django.contrib.auth.models import User
 from django.conf import settings
 from django.db.models.signals import pre_save
 from django.utils.text import slugify
@@ -14,6 +14,22 @@ from django.utils.encoding import python_2_unicode_compatible
 from django.urls import reverse_lazy, reverse
 
 # Create your models here.
+class User(models.Model):
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=70)
+    email = models.EmailField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        #esto es para que retorne nombre y apellido en lugar del objeto
+        return '{} {}'.format(self.first_name, self.last_name)
+
+"""
+class User(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+"""
 
 """
 class User(AbstractUser):    

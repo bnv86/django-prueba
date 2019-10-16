@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-10-2019 a las 14:22:03
+-- Tiempo de generación: 16-10-2019 a las 19:16:15
 -- Versión del servidor: 10.1.37-MariaDB
 -- Versión de PHP: 7.3.0
 
@@ -35,17 +35,10 @@ CREATE TABLE `adopcion_persona` (
   `edad` int(11) NOT NULL,
   `telefono` varchar(12) NOT NULL,
   `email` varchar(254) NOT NULL,
-  `domicilio` longtext NOT NULL
+  `domicilio` longtext NOT NULL,
+  `created_at` datetime(6) NOT NULL,
+  `updated_at` datetime(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `adopcion_persona`
---
-
-INSERT INTO `adopcion_persona` (`id`, `nombre`, `apellido`, `edad`, `telefono`, `email`, `domicilio`) VALUES
-(1, 'Ricardo', 'Alvarez', 53, '123456', 'ricardo@gmail.com', 'casa'),
-(2, 'Yolanda', 'Bianchi', 59, '987654', 'yolanda@gmail.com', 'casa'),
-(4, 'Bruno', 'Vitucci', 32, '1234', 'vituccibruno@gmail.com', 'casa');
 
 -- --------------------------------------------------------
 
@@ -57,20 +50,19 @@ CREATE TABLE `adopcion_solicitud` (
   `id` int(11) NOT NULL,
   `numero_mascotas` int(11) NOT NULL,
   `razones` longtext NOT NULL,
-  `persona_id` int(11) DEFAULT NULL
+  `created_at` datetime(6) NOT NULL,
+  `updated_at` datetime(6) NOT NULL,
+  `usuario_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `adopcion_solicitud`
 --
 
-INSERT INTO `adopcion_solicitud` (`id`, `numero_mascotas`, `razones`, `persona_id`) VALUES
-(1, 2, 'quiero dos gatitos nuevos', 4),
-(3, 3, 'quiero cuidar mi hogar', NULL),
-(4, 3, 'quiero 3 doguis', NULL),
-(5, 2, 'asdasdasd', NULL),
-(10, 1, 'dxadas d', NULL),
-(11, 2, 'quiero perros', 4);
+INSERT INTO `adopcion_solicitud` (`id`, `numero_mascotas`, `razones`, `created_at`, `updated_at`, `usuario_id`) VALUES
+(1, 1, 'porque si', '2019-10-16 15:00:34.606521', '2019-10-16 15:08:24.963552', 2),
+(2, 1, 'sasas', '2019-10-16 15:08:17.957852', '2019-10-16 15:08:17.957852', 2),
+(3, 2, 'dfsdfdsf', '2019-10-16 15:49:46.331664', '2019-10-16 15:49:46.331664', 2);
 
 -- --------------------------------------------------------
 
@@ -137,22 +129,22 @@ INSERT INTO `auth_permission` (`id`, `name`, `content_type_id`, `codename`) VALU
 (22, 'Can change session', 6, 'change_session'),
 (23, 'Can delete session', 6, 'delete_session'),
 (24, 'Can view session', 6, 'view_session'),
-(25, 'Can add vacuna', 7, 'add_vacuna'),
-(26, 'Can change vacuna', 7, 'change_vacuna'),
-(27, 'Can delete vacuna', 7, 'delete_vacuna'),
-(28, 'Can view vacuna', 7, 'view_vacuna'),
-(29, 'Can add mascota', 8, 'add_mascota'),
-(30, 'Can change mascota', 8, 'change_mascota'),
-(31, 'Can delete mascota', 8, 'delete_mascota'),
-(32, 'Can view mascota', 8, 'view_mascota'),
-(33, 'Can add persona', 9, 'add_persona'),
-(34, 'Can change persona', 9, 'change_persona'),
-(35, 'Can delete persona', 9, 'delete_persona'),
-(36, 'Can view persona', 9, 'view_persona'),
-(37, 'Can add solicitud', 10, 'add_solicitud'),
-(38, 'Can change solicitud', 10, 'change_solicitud'),
-(39, 'Can delete solicitud', 10, 'delete_solicitud'),
-(40, 'Can view solicitud', 10, 'view_solicitud');
+(25, 'Can add persona', 7, 'add_persona'),
+(26, 'Can change persona', 7, 'change_persona'),
+(27, 'Can delete persona', 7, 'delete_persona'),
+(28, 'Can view persona', 7, 'view_persona'),
+(29, 'Can add solicitud', 8, 'add_solicitud'),
+(30, 'Can change solicitud', 8, 'change_solicitud'),
+(31, 'Can delete solicitud', 8, 'delete_solicitud'),
+(32, 'Can view solicitud', 8, 'view_solicitud'),
+(33, 'Can add mascota', 9, 'add_mascota'),
+(34, 'Can change mascota', 9, 'change_mascota'),
+(35, 'Can delete mascota', 9, 'delete_mascota'),
+(36, 'Can view mascota', 9, 'view_mascota'),
+(37, 'Can add vacuna', 10, 'add_vacuna'),
+(38, 'Can change vacuna', 10, 'change_vacuna'),
+(39, 'Can delete vacuna', 10, 'delete_vacuna'),
+(40, 'Can view vacuna', 10, 'view_vacuna');
 
 -- --------------------------------------------------------
 
@@ -179,13 +171,8 @@ CREATE TABLE `auth_user` (
 --
 
 INSERT INTO `auth_user` (`id`, `password`, `last_login`, `is_superuser`, `username`, `first_name`, `last_name`, `email`, `is_staff`, `is_active`, `date_joined`) VALUES
-(1, 'pbkdf2_sha256$150000$8bouJNTTAJAo$c1iFU3DMcOMGZIxx2PkyyJLvMVdA6VvGRmJ40yNlM5k=', '2019-10-10 16:47:43.822813', 1, 'admin', '', '', 'vituccibruno@gmail.com', 1, 1, '2019-09-29 22:42:33.381448'),
-(2, 'pbkdf2_sha256$150000$16SCqzT9m4BY$wAyt0GLAolkUmVLsMo1QoWwbH886boLUKZOO0e3/A8A=', NULL, 0, 'jorge18', '', '', '', 0, 1, '2019-10-07 21:45:25.957354'),
-(3, 'pbkdf2_sha256$150000$c45DgJCt2VXD$Q79AuerGUFVQMOSVu4QiroQX/ST3CmiZY2wQL1YkHpM=', NULL, 0, 'jorge20', '', '', '', 0, 1, '2019-10-07 21:46:10.180883'),
-(4, 'pbkdf2_sha256$150000$9JFfvbqCOb0V$wyoDgLCqjL/9ZhiyCNV0POdmKbU1Om9EehlafcUYmuQ=', NULL, 0, 'marchu', 'martin', 'rodriguez', 'mrodri@gmail.com', 0, 1, '2019-10-08 02:39:00.437844'),
-(5, 'pbkdf2_sha256$150000$R1o93KiM1CG0$b+VGlE6SWrL3w0k1bgwcet4vALDTe7dwWNMNxkvG1PI=', '2019-10-15 16:50:41.262284', 0, 'carlitos', 'carlos', 'mendoza', 'cmendoza@gmail.com', 0, 1, '2019-10-08 03:44:25.419341'),
-(6, 'pbkdf2_sha256$150000$vhbnINgLySFp$3KDo7vx92tqAEMgh0VTB2i/QrMDBNsrWdBMsEcfosA8=', '2019-10-09 18:27:34.936416', 0, 'elvitu', 'nicolas', 'vitu', 'bnv_86@hotmail.com', 0, 1, '2019-10-09 18:27:20.971416'),
-(7, 'pbkdf2_sha256$150000$ier7fJo1PdZM$vVDxq1l75WgZXT7YES8eOwBUojWoeqf5AOtHwYLggcc=', '2019-10-11 13:07:27.085981', 0, 'bvitucci', 'muni', 'bera', 'bvitucci@berazategui.gov.ar', 0, 1, '2019-10-09 18:49:29.339416');
+(1, 'pbkdf2_sha256$150000$o0s4Nhp3kGUa$BBNkZacnwsBZAzcaLdxTtz60XmMaI60jCicm/t0ggVU=', '2019-10-16 16:29:53.629370', 1, 'admin', '', '', 'vituccibruno@gmail.com', 1, 1, '2019-10-16 14:56:50.952158'),
+(2, 'pbkdf2_sha256$150000$5v1JkP7KlXri$wg7MXtFWELbq0lTtJ6No1UDhX2A/Knybq9AwACTKHpo=', '2019-10-16 15:00:08.514913', 0, 'ricardoalvarez', 'ricardo', 'alvarez', 'ricardoalvarez@gmail.com', 0, 1, '2019-10-16 14:58:49.020964');
 
 -- --------------------------------------------------------
 
@@ -228,6 +215,15 @@ CREATE TABLE `django_admin_log` (
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `django_admin_log`
+--
+
+INSERT INTO `django_admin_log` (`id`, `action_time`, `object_id`, `object_repr`, `action_flag`, `change_message`, `content_type_id`, `user_id`) VALUES
+(1, '2019-10-16 14:58:49.291991', '2', 'ricardoalvarez', 1, '[{\"added\": {}}]', 4, 1),
+(2, '2019-10-16 16:30:03.695377', '1', 'canina1', 1, '[{\"added\": {}}]', 10, 1),
+(3, '2019-10-16 16:30:10.794086', '2', 'felina1', 1, '[{\"added\": {}}]', 10, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -246,14 +242,14 @@ CREATE TABLE `django_content_type` (
 
 INSERT INTO `django_content_type` (`id`, `app_label`, `model`) VALUES
 (1, 'admin', 'logentry'),
-(9, 'adopcion', 'persona'),
-(10, 'adopcion', 'solicitud'),
+(7, 'adopcion', 'persona'),
+(8, 'adopcion', 'solicitud'),
 (3, 'auth', 'group'),
 (2, 'auth', 'permission'),
 (4, 'auth', 'user'),
 (5, 'contenttypes', 'contenttype'),
-(8, 'mascota', 'mascota'),
-(7, 'mascota', 'vacuna'),
+(9, 'mascota', 'mascota'),
+(10, 'mascota', 'vacuna'),
 (6, 'sessions', 'session');
 
 -- --------------------------------------------------------
@@ -274,26 +270,25 @@ CREATE TABLE `django_migrations` (
 --
 
 INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
-(1, 'contenttypes', '0001_initial', '2019-09-29 22:41:32.923990'),
-(2, 'auth', '0001_initial', '2019-09-29 22:41:34.812098'),
-(3, 'admin', '0001_initial', '2019-09-29 22:41:43.580599'),
-(4, 'admin', '0002_logentry_remove_auto_add', '2019-09-29 22:41:45.117687'),
-(5, 'admin', '0003_logentry_add_action_flag_choices', '2019-09-29 22:41:45.232694'),
-(6, 'adopcion', '0001_initial', '2019-09-29 22:41:45.599715'),
-(7, 'contenttypes', '0002_remove_content_type_name', '2019-09-29 22:41:46.671776'),
-(8, 'auth', '0002_alter_permission_name_max_length', '2019-09-29 22:41:47.561827'),
-(9, 'auth', '0003_alter_user_email_max_length', '2019-09-29 22:41:48.772896'),
-(10, 'auth', '0004_alter_user_username_opts', '2019-09-29 22:41:48.829899'),
-(11, 'auth', '0005_alter_user_last_login_null', '2019-09-29 22:41:49.411933'),
-(12, 'auth', '0006_require_contenttypes_0002', '2019-09-29 22:41:49.442935'),
-(13, 'auth', '0007_alter_validators_add_error_messages', '2019-09-29 22:41:49.487937'),
-(14, 'auth', '0008_alter_user_username_max_length', '2019-09-29 22:41:50.821013'),
-(15, 'auth', '0009_alter_user_last_name_max_length', '2019-09-29 22:41:52.149089'),
-(16, 'auth', '0010_alter_group_name_max_length', '2019-09-29 22:41:53.590172'),
-(17, 'auth', '0011_update_proxy_permissions', '2019-09-29 22:41:53.732180'),
-(18, 'mascota', '0001_initial', '2019-09-29 22:41:54.352215'),
-(19, 'sessions', '0001_initial', '2019-09-29 22:41:57.147375'),
-(20, 'adopcion', '0002_solicitud', '2019-10-04 05:46:58.999408');
+(1, 'contenttypes', '0001_initial', '2019-10-16 14:53:45.824647'),
+(2, 'auth', '0001_initial', '2019-10-16 14:53:46.914756'),
+(3, 'admin', '0001_initial', '2019-10-16 14:53:52.821347'),
+(4, 'admin', '0002_logentry_remove_auto_add', '2019-10-16 14:53:55.525617'),
+(5, 'admin', '0003_logentry_add_action_flag_choices', '2019-10-16 14:53:55.773642'),
+(6, 'contenttypes', '0002_remove_content_type_name', '2019-10-16 14:53:56.662731'),
+(7, 'auth', '0002_alter_permission_name_max_length', '2019-10-16 14:53:57.687834'),
+(8, 'auth', '0003_alter_user_email_max_length', '2019-10-16 14:53:58.770942'),
+(9, 'auth', '0004_alter_user_username_opts', '2019-10-16 14:53:58.818947'),
+(10, 'auth', '0005_alter_user_last_login_null', '2019-10-16 14:53:59.285993'),
+(11, 'auth', '0006_require_contenttypes_0002', '2019-10-16 14:53:59.320997'),
+(12, 'auth', '0007_alter_validators_add_error_messages', '2019-10-16 14:53:59.357000'),
+(13, 'auth', '0008_alter_user_username_max_length', '2019-10-16 14:54:00.186083'),
+(14, 'auth', '0009_alter_user_last_name_max_length', '2019-10-16 14:54:01.028168'),
+(15, 'auth', '0010_alter_group_name_max_length', '2019-10-16 14:54:01.878253'),
+(16, 'auth', '0011_update_proxy_permissions', '2019-10-16 14:54:01.915256'),
+(17, 'sessions', '0001_initial', '2019-10-16 14:54:02.096274'),
+(18, 'adopcion', '0001_initial', '2019-10-16 14:55:20.722136'),
+(19, 'mascota', '0001_initial', '2019-10-16 14:55:21.983262');
 
 -- --------------------------------------------------------
 
@@ -312,10 +307,7 @@ CREATE TABLE `django_session` (
 --
 
 INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALUES
-('13zuvb6lgw9z4rt9fcez3t4vmy751k2h', 'NGJjMzY5NDEwNTIxYjVlMWExZDdhODBjZjFiM2FiYzI1NGVlZWNlYTp7Il9hdXRoX3VzZXJfaWQiOiI1IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIwMTcxYWNkYWZiZTVmZmY3OTc4NDJiNzczNzQ5YWUxYmJmMzg1MzQxIn0=', '2019-10-29 16:50:41.331284'),
-('pv13bomf2bbpf5mgzodyaavfniou6kms', 'NzQxNmVkMTg1NzFlMDBmYzE0NWU5YjAwNDVjMmNiMTJlOWQ0NWI0Nzp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIwNDExZGNhMjE5NzQ2YWNjNjFhNDAxYWRkZTZiOTkyN2MyYzM3NjZjIn0=', '2019-10-22 04:04:39.983810'),
-('qpvpr3crzng8gdl6pm4iqlq9dhdk7nvf', 'MDJiMjc1NzFlNjI3NDk2NzVkNTk5N2RkYmMxMTRkZDYzN2YzMDI0Zjp7fQ==', '2019-10-22 04:03:44.397630'),
-('vebkjkkxj3n1gjyk1rjcmwq8jpmhlwqx', 'NzQxNmVkMTg1NzFlMDBmYzE0NWU5YjAwNDVjMmNiMTJlOWQ0NWI0Nzp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIwNDExZGNhMjE5NzQ2YWNjNjFhNDAxYWRkZTZiOTkyN2MyYzM3NjZjIn0=', '2019-10-13 22:49:35.359583');
+('fkwm58o0nvfxoav7r2v9pgekxfow5jux', 'ODVmMzNlNDI4YTNiZTkxYjI1M2VhMjRjNDg3MmJjYTViZjViZjliNDp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI0MjM1ZDUxMzRlMWIyZjg3OTk2ZmE0Njk4OTA3OWY1MjFhMDMyZjAwIn0=', '2019-10-30 16:29:53.731380');
 
 -- --------------------------------------------------------
 
@@ -329,25 +321,18 @@ CREATE TABLE `mascota_mascota` (
   `sexo` varchar(10) NOT NULL,
   `edad_aproximada` int(11) NOT NULL,
   `fecha_rescate` date NOT NULL,
-  `persona_id` int(11) DEFAULT NULL
+  `created_at` datetime(6) NOT NULL,
+  `updated_at` datetime(6) NOT NULL,
+  `usuario_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `mascota_mascota`
 --
 
-INSERT INTO `mascota_mascota` (`id`, `nombre`, `sexo`, `edad_aproximada`, `fecha_rescate`, `persona_id`) VALUES
-(1, 'tetingui', 'macho', 2, '2018-09-02', 2),
-(3, 'pipo', 'macho', 8, '2019-08-02', 1),
-(5, 'vaquita', 'hembra', 2, '2016-10-02', 2),
-(9, 'la gatita', 'hembra', 5, '2019-08-02', 1),
-(10, 'fray', 'macho', 6, '2013-10-15', 2),
-(11, 'pepim', 'macho', 6, '2013-10-15', 4),
-(13, 'zarco', 'macho', 10, '2003-09-02', 1),
-(16, 'ch', 'hembra', 2, '2003-09-02', NULL),
-(23, 'gatin', 'masculino', 1, '2018-05-05', NULL),
-(24, 'otro gato', 'masculino', 2, '2007-07-07', NULL),
-(27, 'tigresito', 'bisexual', 8, '2005-01-02', NULL);
+INSERT INTO `mascota_mascota` (`id`, `nombre`, `sexo`, `edad_aproximada`, `fecha_rescate`, `created_at`, `updated_at`, `usuario_id`) VALUES
+(1, 'negrita', 'femenino', 4, '2018-10-08', '2019-10-16 15:08:50.749131', '2019-10-16 16:32:29.043910', 2),
+(2, 'blanquita', 'femenino', 2, '2018-10-08', '2019-10-16 15:49:33.803412', '2019-10-16 16:32:25.704576', 2);
 
 -- --------------------------------------------------------
 
@@ -367,11 +352,7 @@ CREATE TABLE `mascota_mascota_vacuna` (
 
 INSERT INTO `mascota_mascota_vacuna` (`id`, `mascota_id`, `vacuna_id`) VALUES
 (1, 1, 1),
-(2, 1, 2),
-(4, 3, 1),
-(9, 5, 1),
-(6, 5, 2),
-(8, 11, 2);
+(2, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -381,16 +362,18 @@ INSERT INTO `mascota_mascota_vacuna` (`id`, `mascota_id`, `vacuna_id`) VALUES
 
 CREATE TABLE `mascota_vacuna` (
   `id` int(11) NOT NULL,
-  `nombre` varchar(50) NOT NULL
+  `nombre` varchar(50) NOT NULL,
+  `created_at` datetime(6) NOT NULL,
+  `updated_at` datetime(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `mascota_vacuna`
 --
 
-INSERT INTO `mascota_vacuna` (`id`, `nombre`) VALUES
-(1, 'canina 1'),
-(2, 'felina 1');
+INSERT INTO `mascota_vacuna` (`id`, `nombre`, `created_at`, `updated_at`) VALUES
+(1, 'canina1', '2019-10-16 16:30:03.613368', '2019-10-16 16:30:03.613368'),
+(2, 'felina1', '2019-10-16 16:30:10.780085', '2019-10-16 16:30:10.780085');
 
 --
 -- Índices para tablas volcadas
@@ -407,7 +390,7 @@ ALTER TABLE `adopcion_persona`
 --
 ALTER TABLE `adopcion_solicitud`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `adopcion_solicitud_persona_id_3618c7a5_fk_adopcion_persona_id` (`persona_id`);
+  ADD KEY `adopcion_solicitud_usuario_id_167615d1_fk_auth_user_id` (`usuario_id`);
 
 --
 -- Indices de la tabla `auth_group`
@@ -487,7 +470,7 @@ ALTER TABLE `django_session`
 --
 ALTER TABLE `mascota_mascota`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `mascota_mascota_persona_id_b662f6c9_fk_adopcion_persona_id` (`persona_id`);
+  ADD KEY `mascota_mascota_usuario_id_3cae744e_fk_auth_user_id` (`usuario_id`);
 
 --
 -- Indices de la tabla `mascota_mascota_vacuna`
@@ -511,13 +494,13 @@ ALTER TABLE `mascota_vacuna`
 -- AUTO_INCREMENT de la tabla `adopcion_persona`
 --
 ALTER TABLE `adopcion_persona`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `adopcion_solicitud`
 --
 ALTER TABLE `adopcion_solicitud`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `auth_group`
@@ -541,7 +524,7 @@ ALTER TABLE `auth_permission`
 -- AUTO_INCREMENT de la tabla `auth_user`
 --
 ALTER TABLE `auth_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `auth_user_groups`
@@ -559,7 +542,7 @@ ALTER TABLE `auth_user_user_permissions`
 -- AUTO_INCREMENT de la tabla `django_admin_log`
 --
 ALTER TABLE `django_admin_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `django_content_type`
@@ -571,19 +554,19 @@ ALTER TABLE `django_content_type`
 -- AUTO_INCREMENT de la tabla `django_migrations`
 --
 ALTER TABLE `django_migrations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de la tabla `mascota_mascota`
 --
 ALTER TABLE `mascota_mascota`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `mascota_mascota_vacuna`
 --
 ALTER TABLE `mascota_mascota_vacuna`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `mascota_vacuna`
@@ -599,7 +582,7 @@ ALTER TABLE `mascota_vacuna`
 -- Filtros para la tabla `adopcion_solicitud`
 --
 ALTER TABLE `adopcion_solicitud`
-  ADD CONSTRAINT `adopcion_solicitud_persona_id_3618c7a5_fk_adopcion_persona_id` FOREIGN KEY (`persona_id`) REFERENCES `adopcion_persona` (`id`);
+  ADD CONSTRAINT `adopcion_solicitud_usuario_id_167615d1_fk_auth_user_id` FOREIGN KEY (`usuario_id`) REFERENCES `auth_user` (`id`);
 
 --
 -- Filtros para la tabla `auth_group_permissions`
@@ -639,7 +622,7 @@ ALTER TABLE `django_admin_log`
 -- Filtros para la tabla `mascota_mascota`
 --
 ALTER TABLE `mascota_mascota`
-  ADD CONSTRAINT `mascota_mascota_persona_id_b662f6c9_fk_adopcion_persona_id` FOREIGN KEY (`persona_id`) REFERENCES `adopcion_persona` (`id`);
+  ADD CONSTRAINT `mascota_mascota_usuario_id_3cae744e_fk_auth_user_id` FOREIGN KEY (`usuario_id`) REFERENCES `auth_user` (`id`);
 
 --
 -- Filtros para la tabla `mascota_mascota_vacuna`

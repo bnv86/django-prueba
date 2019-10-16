@@ -1,6 +1,8 @@
 from django import forms
 from django.forms import ModelForm
 from apps.adopcion.models import Persona, Solicitud
+from apps.usuario.models import User
+from django.contrib.auth.models import User
 
 class PersonaForm(forms.ModelForm):
 
@@ -38,14 +40,17 @@ class SolicitudForm(forms.ModelForm):
         model = Solicitud
         
         fields = [
+            'usuario',
             'numero_mascotas',
             'razones',
         ]
         labels = {
+            'usuario': 'Usuario',
             'numero_mascotas': 'Numero de mascotas',
             'razones': 'Razones para adoptar',
         }
         widgets = {
+            'usuario':forms.Select(attrs={'class':'form-control'}),
             'numero_mascotas':forms.TextInput(attrs={'class':'form-control'}),
             'razones':forms.Textarea(attrs={'class':'form-control'}),
         }

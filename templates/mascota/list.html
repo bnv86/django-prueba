@@ -20,6 +20,7 @@
             <td>Sexo</td>
             <td>Edad</td>
             <td>Fecha de Rescate</td>
+            <td>Vacunas</td>
             <td>Adoptante</td>
             <td>Acciones</td>
         </tr>
@@ -33,7 +34,8 @@
             <td>{{ mascota.sexo }}</td>
             <td>{{ mascota.edad_aproximada }}</td>
             <td>{{ mascota.fecha_rescate }}</td>
-            <td>{{ mascota.persona.nombre }} {{ mascota.persona.apellido }}</td>
+            <td>{{ mascota.vacuna }}</td>
+            <td>{{ mascota.usuario.first_name }} {{ mascota.usuario.last_name }}</td>
             <td>
                 <a class="btn btn-primary" href="{% url 'mascota_editar' mascota.id %}">Editar</a>
                 <a class="btn btn-danger" href="{% url 'mascota_eliminar' mascota.id %}">Eliminar</a>
@@ -62,3 +64,7 @@
 </ul>
 
 {% endblock %}
+
+<!--
+    <td>{{ mascota.persona.nombre }} {{ mascota.persona.apellido }}</td>
+-->

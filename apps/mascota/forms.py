@@ -1,5 +1,6 @@
 from django import forms
-from apps.mascota.models import Mascota
+from apps.mascota.models import Mascota, User
+from django.contrib.auth.models import User
 
 class MascotaForm(forms.ModelForm):
 
@@ -11,7 +12,7 @@ class MascotaForm(forms.ModelForm):
             'sexo',
             'edad_aproximada',
             'fecha_rescate',
-            'persona',
+            'usuario',
             'vacuna',
         ]
         labels = {
@@ -19,7 +20,7 @@ class MascotaForm(forms.ModelForm):
             'sexo': 'Sexo',
             'edad_aproximada': 'Edad aproximada',
             'fecha_rescate': 'Fecha de rescate',
-            'persona': 'Adoptante',
+            'usuario': 'Adoptante',
             'vacuna': 'Vacunas',
         }
         widgets = {
@@ -27,6 +28,6 @@ class MascotaForm(forms.ModelForm):
             'sexo': forms.TextInput(attrs={'class':'form-control'}),
             'edad_aproximada': forms.TextInput(attrs={'class':'form-control'}),
             'fecha_rescate': forms.TextInput(attrs={'class':'form-control'}),
-            'persona': forms.Select(attrs={'class':'form-control'}),
+            'usuario': forms.Select(attrs={'class':'form-control'}),
             'vacuna': forms.CheckboxSelectMultiple(),
         }

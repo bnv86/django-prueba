@@ -6,6 +6,7 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.forms import ModelForm
 from apps.adopcion.models import Persona, Solicitud
 from apps.adopcion.forms import PersonaForm, SolicitudForm
+from apps.usuario.models import User
 from django.urls import reverse_lazy
 from django.core import serializers
 
