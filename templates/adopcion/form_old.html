@@ -25,3 +25,42 @@
 
 <!-- {{ form1.nombre }} 
     {{ form2.as_p }} -->
+
+    <!--
+    <form method="post">
+
+        <p>
+        </p><p><label for="id_nombre">Nombre:</label> <input type="text" name="nombre" class="form-control" maxlength="50" required="" id="id_nombre"></p>
+    <p><label for="id_sexo">Sexo:</label> <input type="text" name="sexo" class="form-control" maxlength="10" required="" id="id_sexo"></p>
+    <p><label for="id_edad_aproximada">Edad aproximada:</label> <input type="text" name="edad_aproximada" class="form-control" required="" id="id_edad_aproximada"></p>
+    <p><label for="id_fecha_rescate">Fecha de rescate:</label> <input type="text" name="fecha_rescate" class="form-control" required="" id="id_fecha_rescate"></p>
+    <p><label for="id_usuario">Adoptante:</label> <select name="usuario" class="form-control" id="id_usuario">
+      <option value="" selected="">---------</option>
+    
+      <option value="1">admin</option>
+    
+      <option value="2">ricardoalvarez</option>
+    
+      <option value="3">bvitucci</option>
+    
+    </select></p>
+    <p><label>Vacunas:</label> </p><ul id="id_vacuna">
+        <li><label for="id_vacuna_0"><input type="checkbox" name="vacuna" value="1" id="id_vacuna_0">
+     canina1</label>
+    
+    </li>
+        <li><label for="id_vacuna_1"><input type="checkbox" name="vacuna" value="2" id="id_vacuna_1">
+     felina1</label>
+    
+    </li>
+    </ul><p></p>
+        <button class="btn btn-primary" type="submit">Guardar</button>
+        <p></p>
+    </form>
+
+        <p><label for="id_numero_mascotas">Cantidad de mascotas:</label> <input class="form-control" type="number" min="1" max="5" name="numero_mascotas" value="{{ solicitud.numero_mascotas }}"></p>
+    <p><label for="id_razones">Razones:</label> <textarea class="form-control" rows="3" name="razones" value="{{ solicitud.razones }}"></textarea> </p>
+    <p><label for="id_usuario">Adoptante:</label> <input class="form-control" type="text" name="usuario" value="{{ form.usuario }}"></p>
+    <p><label for="id_usuario">Adoptante:</label> <input type="text" name="usuario" class="form-control" id="id_usuario" value="{{ user.first_name }} {{ user.last_name }}" disabled></p>
+    
+-->

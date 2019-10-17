@@ -158,7 +158,7 @@ EMAIL_USE_TLS = True
 EMAIL_HOST = 'mail.berazategui.gov.ar' #'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'bvitucci@berazategui.gov.ar'
-EMAIL_HOST_PASSWORD = 'colo1884'
+EMAIL_HOST_PASSWORD = 'bnvcolo1884'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 
