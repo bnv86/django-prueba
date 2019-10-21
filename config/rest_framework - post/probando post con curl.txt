@@ -1,0 +1,10 @@
+NO FUNCIONAN
+
+D:\Ambientes\prueba-curso\Scripts\git\django-prueba>
+curl -X POST http://192.168.0.37:8000/api/usuarios/ -H "Content-Type: application/json" -d '{"username" : "pablo123", "first_name" : "pablo", "last_name" : "granados", "email" : "pgranados@gmail.com"}'
+
+curl -X POST http://192.168.0.37:8000/api/mascotas/ -H "Content-Type: application/json" -d '{"nombre" : "pipo", "sexo" : "macho", "edad_aproximada" : "5", "fecha_rescate" : "2011-03-09"}'
+
+curl -X POST http://localhost:8000/api/mascotas/ -H "Content-Type: application/json" -d '{"nombre" : "pipo", "sexo" : "macho", "edad_aproximada" : "5", "fecha_rescate" : "2011-03-09"}'
+
+curl -X POST http://localhost:8000/api/vacunas/ -H "Content-Type: application/json" -d '{"nombre" : "triplefelina"}'

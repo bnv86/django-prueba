@@ -9,7 +9,8 @@ from . import views
 urlpatterns = [
     url(r'^registrar$', UsuarioRegister.as_view(), name='registrar'),
     url(r'^listado', login_required(listado), name='listado'),
-    url(r'^api$', UserAPI.as_view(), name='api'),
+    #url(r'^api$', UserAPI.as_view(), name='api'),
+    #api en uso
     url(r'^api/usuarios/$', ListUsuario.as_view(), name='usuarios_api'),
     url(r'^detail$', profile_detail, name='profile_detail'),
     url(r'^update$', profile_update, name='profile_update_old'),

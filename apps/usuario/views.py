@@ -1,6 +1,8 @@
 import json
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from django.core import serializers
+from apps.usuario.serializer import UserSerializer
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
@@ -15,8 +17,6 @@ from django.contrib.auth.views import LogoutView
 from django.urls import reverse_lazy, reverse
 from apps.usuario.forms import RegistroForm, UserEditForm, profileForm
 #from .models import UserProfile
-from django.core import serializers
-from apps.usuario.serializer import UserSerializer
 from django.views.decorators.debug import sensitive_post_parameters
 from django.views.decorators.csrf import csrf_protect
 #from django.contrib.auth.signals import user_logged_out
@@ -96,6 +96,15 @@ class ListUsuario(APIView):
         usuarios = User.objects.all()
         usuarios_json = UserSerializer(usuarios, many=True)
         return Response (usuarios_json.data)
+
+    def post(self, request):
+        usuarios_json = UserSerializer(data=request.data) #UnMarshall
+        if usuarios_json.is_valid():
+            usuarios_json.save()
+            return Response(usuarios_json.data, status=201)
+        else:
+            return Response(usuarios_json.errors, status=400)
+
 
 # Serializado para la API: funcion
 def listado(request):

@@ -23,11 +23,27 @@ class ListMascota(APIView):
         mascotas_json = MascotaSerializer(mascotas, many=True)
         return Response (mascotas_json.data)
 
+    def post(self, request):
+        mascotas_json = MascotaSerializer(data=request.data) #UnMarshall
+        if mascotas_json.is_valid():
+            mascotas_json.save()
+            return Response(mascotas_json.data, status=201)
+        else:
+            return Response(mascotas_json.errors, status=400)
+
 class ListVacuna(APIView):
     def get(self, request):
         vacunas = Vacuna.objects.all()
         vacunas_json = VacunaSerializer(vacunas, many=True)
         return Response (vacunas_json.data)
+
+    def post(self, request):
+        vacunas_json = VacunaSerializer(data=request.data) #UnMarshall
+        if vacunas_json.is_valid():
+            vacunas_json.save()
+            return Response(vacunas_json.data, status=201)
+        else:
+            return Response(vacunas_json.errors, status=400)
 
 def listado(request):
     lista = serializers.serialize('json', Mascota.objects.all())

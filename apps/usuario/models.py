@@ -14,6 +14,7 @@ from django.utils.encoding import python_2_unicode_compatible
 from django.urls import reverse_lazy, reverse
 
 # Create your models here.
+"""
 class User(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=70)
@@ -24,6 +25,7 @@ class User(models.Model):
     def __str__(self):
         #esto es para que retorne nombre y apellido en lugar del objeto
         return '{} {}'.format(self.first_name, self.last_name)
+"""
 
 """
 class User(models.Model):

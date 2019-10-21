@@ -23,11 +23,27 @@ class ListSolicitud(APIView):
         solicitud_json = SolicitudSerializer(solicitud, many=True)
         return Response (solicitud_json.data)
 
+    def post(self, request):
+        solicitud_json = SolicitudSerializer(data=request.data) #UnMarshall
+        if solicitud_json.is_valid():
+            solicitud_json.save()
+            return Response(solicitud_json.data, status=201)
+        else:
+            return Response(solicitud_json.errors, status=400)
+
 class ListPersona(APIView):
     def get(self, request):
         persona = Persona.objects.all()
         persona_json = PersonaSerializer(persona, many=True)
         return Response (persona_json.data)
+
+    def post(self, request):
+        persona_json = PersonaSerializer(data=request.data) #UnMarshall
+        if persona_json.is_valid():
+            persona_json.save()
+            return Response(persona_json.data, status=201)
+        else:
+            return Response(persona_json.errors, status=400)
 
 def listadoPersona(request):
     lista = serializers.serialize('json', Persona.objects.all())
