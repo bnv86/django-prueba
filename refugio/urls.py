@@ -26,6 +26,10 @@ from django.contrib.auth.views import LoginView, logout_then_login, PasswordRese
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    #APIs
+    path('', include('apps.usuario.urls')),
+    path('', include('apps.mascota.urls')), #incluye mascotas y vacunas
+    path('', include('apps.adopcion.urls')),
     path('mascota/', include ('apps.mascota.urls'), name='mascota'),
     path('adopcion/', include ('apps.adopcion.urls'), name='adopcion'),
     path('solicitud/', include ('apps.adopcion.urls'), name='solicitud'),

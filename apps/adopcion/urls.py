@@ -1,6 +1,7 @@
 from django.conf.urls import url, include
 from django.contrib.auth.decorators import login_required
-from apps.adopcion.views import listadoPersona, listadoSolicitud, index_adopcion, SolicitudList, SolicitudCreate, SolicitudUpdate, SolicitudDelete
+from apps.adopcion.views import index_adopcion, SolicitudList, SolicitudCreate, SolicitudUpdate, SolicitudDelete, \
+    ListSolicitud, ListPersona, listadoPersona, listadoSolicitud
 
 urlpatterns = [
     #path('admin/', admin.site.urls),
@@ -14,4 +15,8 @@ urlpatterns = [
     #API
     url(r'^listadoPersona$', login_required(listadoPersona), name='listado_persona'),
     url(r'^listadoSolicitud$', login_required(listadoSolicitud), name='listado_solicitud'),
+
+    #api en uso
+    url(r'^api/solicitudes/$', ListSolicitud.as_view(), name='solicitud_api'),
+    url(r'^api/personas/$', ListPersona.as_view(), name='personas_api'),
 ]

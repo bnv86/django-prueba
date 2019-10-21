@@ -8,9 +8,26 @@ from apps.adopcion.models import Persona, Solicitud
 from apps.adopcion.forms import PersonaForm, SolicitudForm
 from apps.usuario.models import User
 from django.urls import reverse_lazy
+
+from rest_framework.views import APIView
+from rest_framework.response import Response
 from django.core import serializers
+from apps.adopcion.serializer import SolicitudSerializer, PersonaSerializer
 
 # Create your views here.
+
+# Serializado para la API: clase
+class ListSolicitud(APIView):
+    def get(self, request):
+        solicitud = Solicitud.objects.all()
+        solicitud_json = SolicitudSerializer(solicitud, many=True)
+        return Response (solicitud_json.data)
+
+class ListPersona(APIView):
+    def get(self, request):
+        persona = Persona.objects.all()
+        persona_json = PersonaSerializer(persona, many=True)
+        return Response (persona_json.data)
 
 def listadoPersona(request):
     lista = serializers.serialize('json', Persona.objects.all())

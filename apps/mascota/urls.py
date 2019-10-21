@@ -1,7 +1,7 @@
 from django.conf.urls import url, include
 from django.contrib.auth.decorators import login_required
 from apps.mascota.views import listado, index_mascota, mascota_view, mascota_list, mascota_edit, mascota_delete, \
-    MascotaList, MascotaCreate, MascotaUpdate, MascotaDelete
+    MascotaList, MascotaCreate, MascotaUpdate, MascotaDelete, ListMascota, ListVacuna
 from django.views.generic import TemplateView
 
 urlpatterns = [
@@ -15,6 +15,9 @@ urlpatterns = [
 
     #API
     url(r'^listado$', login_required(listado), name='listado'),
+    #api en uso
+    url(r'^api/mascotas/$', ListMascota.as_view(), name='mascotas_api'),
+    url(r'^api/vacunas/$', ListVacuna.as_view(), name='vacunas_api'),
 ]
 
     #vistas basadas en funciones

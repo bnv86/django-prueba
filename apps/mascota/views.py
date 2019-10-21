@@ -6,12 +6,28 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 #from django.core.urlresolvers import reverse_lazy VERSION VIEJA DE DJANGO
 from django.urls import reverse_lazy
-from django.core import serializers
-
 from apps.mascota.forms import MascotaForm
-from apps.mascota.models import Mascota
+from apps.mascota.models import Mascota, Vacuna
+import json
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from django.core import serializers
+from apps.mascota.serializer import MascotaSerializer, VacunaSerializer
 
 # Create your views here.
+
+# Serializado para la API: clase
+class ListMascota(APIView):
+    def get(self, request):
+        mascotas = Mascota.objects.all()
+        mascotas_json = MascotaSerializer(mascotas, many=True)
+        return Response (mascotas_json.data)
+
+class ListVacuna(APIView):
+    def get(self, request):
+        vacunas = Vacuna.objects.all()
+        vacunas_json = VacunaSerializer(vacunas, many=True)
+        return Response (vacunas_json.data)
 
 def listado(request):
     lista = serializers.serialize('json', Mascota.objects.all())

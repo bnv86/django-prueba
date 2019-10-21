@@ -1,5 +1,5 @@
 from django.conf.urls import url, include
-from apps.usuario.views import listado, UsuarioRegister, UsuarioUpdate, UserAPI, profile_update, usuarioDetail, profile_detail #, EditUserProfile, DetailUserProfile, EditUser, password_change, UpdateUserView, UsuarioDetail
+from apps.usuario.views import listado, UsuarioRegister, UsuarioUpdate, UserAPI, ListUsuario, profile_update, usuarioDetail, profile_detail #, EditUserProfile, DetailUserProfile, EditUser, password_change, UpdateUserView, UsuarioDetail
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.contrib.auth.forms import AdminPasswordChangeForm
@@ -10,6 +10,7 @@ urlpatterns = [
     url(r'^registrar$', UsuarioRegister.as_view(), name='registrar'),
     url(r'^listado', login_required(listado), name='listado'),
     url(r'^api$', UserAPI.as_view(), name='api'),
+    url(r'^api/usuarios/$', ListUsuario.as_view(), name='usuarios_api'),
     url(r'^detail$', profile_detail, name='profile_detail'),
     url(r'^update$', profile_update, name='profile_update_old'),
 ]

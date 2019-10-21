@@ -1,5 +1,6 @@
 import json
 from rest_framework.views import APIView
+from rest_framework.response import Response
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
@@ -22,11 +23,6 @@ from django.views.decorators.csrf import csrf_protect
 #from django.dispatch import receiver
 
 # Create your views here.
-
-# Serializado para la API
-def listado(request):
-    lista = serializers.serialize('json', User.objects.all(), fields=['username', 'email', 'first_name', 'last_name'])
-    return HttpResponse(lista, content_type='application/json')
 
 class UsuarioRegister(SuccessMessageMixin, CreateView):
     model = User
@@ -86,19 +82,25 @@ class LogoutUsuario(SuccessMessageMixin, LogoutView):
     success_url = reverse_lazy('login')
     success_message = "%(username)s ha cerrado sesión!"
 
-
+# Serializado para la API: clase
 class UserAPI(APIView):
     serializer = UserSerializer
-
     def get(self, request, format=None):
         lista = User.objects.all()
         response = self.serializer(lista, many=True)
         return HttpResponse(json.dumps(response.data), content_type='application/json')
 
+# Serializado para la API: clase
+class ListUsuario(APIView):
+    def get(self, request):
+        usuarios = User.objects.all()
+        usuarios_json = UserSerializer(usuarios, many=True)
+        return Response (usuarios_json.data)
 
-
-
-
+# Serializado para la API: funcion
+def listado(request):
+    lista = serializers.serialize('json', User.objects.all(), fields=['username', 'email', 'first_name', 'last_name'])
+    return HttpResponse(lista, content_type='application/json')
 
 """
 class UsuarioUpdate(SuccessMessageMixin, UpdateView):
