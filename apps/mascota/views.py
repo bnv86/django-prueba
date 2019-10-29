@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 #listas basadas en clases
@@ -30,6 +30,32 @@ class ListMascota(APIView):
             return Response(mascotas_json.data, status=201)
         else:
             return Response(mascotas_json.errors, status=400)
+
+class DetailMascota(APIView):
+    def get_object(self, pk):
+        try:
+            #mascota = Mascota.objects.get(pk=pk)
+            return Mascota.objects.get(pk=pk)
+        except Mascota.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk):
+        mascota = self.get_object(pk)
+        mascota_json = MascotaSerializer(mascota)
+        return Response (mascota_json.data)
+
+    def put(self, request, pk):
+        mascota = self.get_object(pk)
+        mascota_json = MascotaSerializer(mascota, data=request.data)
+        if mascota_json.is_valid():
+            mascota_json.save()
+            return Response(mascota_json.data)
+        return Response(mascota_json.errors, status=400)
+    
+    def delete(self, request, pk):
+        mascota = self.get_object(pk)
+        mascota.delete()
+        return Response(status=204)
 
 class ListVacuna(APIView):
     def get(self, request):
