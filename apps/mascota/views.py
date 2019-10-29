@@ -31,6 +31,22 @@ class ListMascota(APIView):
         else:
             return Response(mascotas_json.errors, status=400)
 
+class ListVacuna(APIView):
+    def get(self, request):
+        vacunas = Vacuna.objects.all()
+        vacunas_json = VacunaSerializer(vacunas, many=True)
+        return Response (vacunas_json.data)
+
+    def post(self, request):
+        vacunas_json = VacunaSerializer(data=request.data) #UnMarshall
+        if vacunas_json.is_valid():
+            vacunas_json.save()
+            return Response(vacunas_json.data, status=201)
+        else:
+            return Response(vacunas_json.errors, status=400)
+
+###################
+
 class DetailMascota(APIView):
     def get_object(self, pk):
         try:
@@ -57,19 +73,33 @@ class DetailMascota(APIView):
         mascota.delete()
         return Response(status=204)
 
-class ListVacuna(APIView):
-    def get(self, request):
-        vacunas = Vacuna.objects.all()
-        vacunas_json = VacunaSerializer(vacunas, many=True)
-        return Response (vacunas_json.data)
 
-    def post(self, request):
-        vacunas_json = VacunaSerializer(data=request.data) #UnMarshall
-        if vacunas_json.is_valid():
-            vacunas_json.save()
-            return Response(vacunas_json.data, status=201)
-        else:
-            return Response(vacunas_json.errors, status=400)
+class DetailVacuna(APIView):
+    def get_object(self, pk):
+        try:
+            #mascota = Mascota.objects.get(pk=pk)
+            return Vacuna.objects.get(pk=pk)
+        except Vacuna.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk):
+        vacuna = self.get_object(pk)
+        vacuna_json = VacunaSerializer(vacuna)
+        return Response (vacuna_json.data)
+
+    def put(self, request, pk):
+        vacuna = self.get_object(pk)
+        vacuna_json = VacunaSerializer(vacuna, data=request.data)
+        if vacuna_json.is_valid():
+            vacuna_json.save()
+            return Response(vacuna_json.data)
+        return Response(vacuna_json.errors, status=400)
+    
+    def delete(self, request, pk):
+        vacuna = self.get_object(pk)
+        vacuna.delete()
+        return Response(status=204)
+
 
 def listado(request):
     lista = serializers.serialize('json', Mascota.objects.all())
