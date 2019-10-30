@@ -25,6 +25,7 @@ class Solicitud(models.Model):
     razones = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    #user = models.OneToOneField(User) #relacion uno a uno de solicitud con usuario, luego de esto hay que hacer makemigrations con la opc 1, luego migrate
 
     def __str__(self):
         #esto es para que retorne el nombre completo de la persona y el id de la solicitud en lugar del objeto
