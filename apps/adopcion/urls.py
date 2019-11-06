@@ -1,6 +1,6 @@
 from django.conf.urls import url, include
 from django.contrib.auth.decorators import login_required
-from apps.adopcion.views import index_adopcion, SolicitudList, SolicitudCreate, SolicitudUpdate, SolicitudDelete, \
+from apps.adopcion.views import index_adopcion, SolicitudList, SolicitudCreate, SolicitudUpdate, SolicitudDelete, DetailSolicitud, DetailPersona, \
     ListSolicitud, ListPersona, listadoPersona, listadoSolicitud
 
 urlpatterns = [
@@ -17,6 +17,13 @@ urlpatterns = [
     url(r'^listadoSolicitud$', login_required(listadoSolicitud), name='listado_solicitud'),
 
     #api en uso
-    url(r'^api/solicitudes/$', ListSolicitud.as_view(), name='solicitud_api'),
-    url(r'^api/personas/$', ListPersona.as_view(), name='personas_api'),
+    url(r'^api/solicitudes/$', ListSolicitud.as_view(), name='solicitud_api'), #GET, POST
+    url(r'^api/solicitud/(?P<pk>\d+)$', DetailSolicitud.as_view(), name='solicitud_detail'), #PUT, DELETE
+
+    url(r'^api/personas/$', ListPersona.as_view(), name='personas_api'), #GET, POST
+    url(r'^api/persona/(?P<pk>\d+)$', DetailPersona.as_view(), name='persona_detail'), #PUT, DELETE
+
+    #api en uso
+    #url(r'^api/solicitudes/$', ListSolicitud.as_view(), name='solicitud_api'),
+    #url(r'^api/personas/$', ListPersona.as_view(), name='personas_api'),
 ]

@@ -77,7 +77,6 @@ class DetailMascota(APIView):
 class DetailVacuna(APIView):
     def get_object(self, pk):
         try:
-            #mascota = Mascota.objects.get(pk=pk)
             return Vacuna.objects.get(pk=pk)
         except Vacuna.DoesNotExist:
             raise Http404

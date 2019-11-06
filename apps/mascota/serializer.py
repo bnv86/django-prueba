@@ -4,7 +4,7 @@ from apps.mascota.models import Mascota, Vacuna
 class MascotaSerializer(ModelSerializer):
     class Meta:
         model = Mascota
-        fields = ('nombre', 'sexo', 'edad_aproximada', 'fecha_rescate', 'created_at', 'updated_at')
+        fields = ('nombre', 'sexo', 'edad_aproximada', 'fecha_rescate', 'usuario', 'vacuna', 'created_at', 'updated_at')
 
 
 class VacunaSerializer(ModelSerializer):

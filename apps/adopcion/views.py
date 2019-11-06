@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
@@ -8,7 +8,7 @@ from apps.adopcion.models import Persona, Solicitud
 from apps.adopcion.forms import PersonaForm, SolicitudForm
 from apps.usuario.models import User
 from django.urls import reverse_lazy
-
+import json
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.core import serializers
@@ -44,6 +44,62 @@ class ListPersona(APIView):
             return Response(persona_json.data, status=201)
         else:
             return Response(persona_json.errors, status=400)
+
+#############################
+
+class DetailSolicitud(APIView):
+    def get_object(self, pk):
+        try:
+            #mascota = Mascota.objects.get(pk=pk)
+            return Solicitud.objects.get(pk=pk)
+        except Solicitud.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk):
+        solicitud = self.get_object(pk)
+        solicitud_json = SolicitudSerializer(solicitud)
+        return Response (solicitud_json.data)
+
+    def put(self, request, pk):
+        solicitud = self.get_object(pk)
+        solicitud_json = SolicitudSerializer(solicitud, data=request.data)
+        if solicitud_json.is_valid():
+            solicitud_json.save()
+            return Response(solicitud_json.data)
+        return Response(solicitud_json.errors, status=400)
+    
+    def delete(self, request, pk):
+        solicitud = self.get_object(pk)
+        solicitud.delete()
+        return Response(status=204)
+
+
+class DetailPersona(APIView):
+    def get_object(self, pk):
+        try:
+            #mascota = Mascota.objects.get(pk=pk)
+            return Persona.objects.get(pk=pk)
+        except Persona.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk):
+        persona = self.get_object(pk)
+        persona_json = PersonaSerializer(persona)
+        return Response (solicitud_json.data)
+
+    def put(self, request, pk):
+        persona = self.get_object(pk)
+        persona_json = PersonaSerializer(persona, data=request.data)
+        if persona_json.is_valid():
+            persona_json.save()
+            return Response(persona_json.data)
+        return Response(persona_json.errors, status=400)
+    
+    def delete(self, request, pk):
+        persona = self.get_object(pk)
+        persona.delete()
+        return Response(status=204)
+
 
 def listadoPersona(request):
     lista = serializers.serialize('json', Persona.objects.all())

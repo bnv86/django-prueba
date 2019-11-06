@@ -17,10 +17,10 @@ urlpatterns = [
     url(r'^listado$', login_required(listado), name='listado'),
     #api en uso
     url(r'^api/mascotas/$', ListMascota.as_view(), name='mascotas_api'), #GET, POST
-    url(r'^api/mascotas/(?P<pk>\d+)$', DetailMascota.as_view(), name='mascota_detail'), #PUT, DELETE
+    url(r'^api/mascota/(?P<pk>\d+)$', DetailMascota.as_view(), name='mascota_detail'), #PUT, DELETE
 
     url(r'^api/vacunas/$', ListVacuna.as_view(), name='vacunas_api'), #GET, POST
-    url(r'^api/vacunas/(?P<pk>\d+)$', DetailVacuna.as_view(), name='vacuna_detail'), #PUT, DELETE
+    url(r'^api/vacuna/(?P<pk>\d+)$', DetailVacuna.as_view(), name='vacuna_detail'), #PUT, DELETE
 ]
 
     #vistas basadas en funciones

@@ -8,6 +8,8 @@ username: admin
 email: vituccibruno@
 pass: ********
 
+D:\Ambientes\prueba-curso\Scripts\activate
+
 
 ruta pc casa: 
 D:\Ambientes\prueba-curso\Scripts\git\django-prueba
