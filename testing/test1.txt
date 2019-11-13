@@ -1,0 +1,4 @@
+python -m doctest test1.txt
+>>> from algoritmos import fibonacci
+>>> fibonacci(12)
+144
