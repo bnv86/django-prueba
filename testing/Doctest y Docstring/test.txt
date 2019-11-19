@@ -1,4 +1,4 @@
-python -m doctest test.txt
+#python -m doctest test.txt
 La suma de 2 + 2 es igual a 4
 >>> 2 + 2
 4
