@@ -2,3 +2,4 @@ pip install pytest
 
 pip install unittest2 (para py3)
 
+pip install coverage
