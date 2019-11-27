@@ -9,6 +9,7 @@ from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm #PasswordChangeForm, UserChangeForm
+from django.contrib.auth import authenticate, login #as login_django
 #from registration.signals import user_registered
 from django.contrib.auth.decorators import login_required
 from django.views.generic import CreateView, UpdateView, View
@@ -110,6 +111,24 @@ class ListUsuario(APIView):
 def listado(request):
     lista = serializers.serialize('json', User.objects.all(), fields=['username', 'email', 'first_name', 'last_name'])
     return HttpResponse(lista, content_type='application/json')
+
+
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(username=username, password=password) #None
+        if user: #no es None
+            login(request, user)
+            print("Usuario autenticado")
+        else:
+            print("Usuario no autenticado")
+    
+    return render(request, 'users/login.html', {
+
+    })
+
 
 """
 class UsuarioUpdate(SuccessMessageMixin, UpdateView):
