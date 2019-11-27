@@ -3,3 +3,6 @@ pip install pytest
 pip install unittest2 (para py3)
 
 pip install coverage
+
+coverage html shopping_cart.py (genera un directorio htmlcov)
+python -m http.server (levanta servidor propio de python)

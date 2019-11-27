@@ -42,3 +42,6 @@ class ShoppingCart:
         else:
             return self.items[ self.items.index(item) - 1 ]
 
+    def last(self):
+        return self.items[-1]
+
