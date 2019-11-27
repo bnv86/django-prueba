@@ -33,6 +33,13 @@ class UsuarioRegister(SuccessMessageMixin, CreateView):
     # en algun momento tengo que cambiar esto, para que primero envie un mail de confirmacion como en password_reset
     success_message = "%(username)s ha sido registrado con éxito!"
 
+"""
+def register(request):
+    form = RegistroForm()
+    return render(request, 'users/register.html', {
+        'form': form
+    })
+"""
 
 @login_required
 def profile_update(request):

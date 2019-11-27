@@ -5,7 +5,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.forms import ModelForm
 from apps.adopcion.models import Persona, Solicitud
-from apps.adopcion.forms import PersonaForm, SolicitudForm
+from apps.adopcion.forms import PersonaForm, SolicitudForm, SolicitudForm2
 from apps.usuario.models import User
 from django.urls import reverse_lazy
 import json
@@ -119,13 +119,20 @@ class SolicitudList(ListView):
     paginate_by = 5
 
 class SolicitudCreate(SuccessMessageMixin, CreateView):
-    fields = '__all__'
+    #fields = '__all__' #esto genera campos sin formato de bootstrap
     model = Solicitud
+    form_class = SolicitudForm
     #form_class1 = SolicitudForm
     #form_class2 = PersonaForm
     template_name = 'adopcion/form_old.html'
     success_url = reverse_lazy('solicitud_listar')
     success_message = "La solicitud ha sido generada con éxito!"
+
+def solicitud(request):
+    form = SolicitudForm2()
+    return render(request, 'adopcion/form2.html', {
+        'form': form
+    })
 
     """
     #sobreescribir los metodos de las vistas basadas en clases (get_context_data)

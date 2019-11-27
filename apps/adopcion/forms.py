@@ -37,6 +37,7 @@ class PersonaForm(forms.ModelForm):
 class SolicitudForm(forms.ModelForm):
 
     class Meta:
+
         model = Solicitud
         
         fields = [
@@ -50,7 +51,13 @@ class SolicitudForm(forms.ModelForm):
             'razones': 'Razones para adoptar',
         }
         widgets = {
-            'usuario':forms.Select(attrs={'class':'form-control'}),
-            'numero_mascotas':forms.TextInput(attrs={'class':'form-control'}),
+            'usuario':forms.Select(attrs={'class':'form-control'}), #tiene que quedar fijo el usuario logueado
+            'numero_mascotas': forms.NumberInput(attrs={'class':'form-control', 'min': 1, 'max': 5}),
             'razones':forms.Textarea(attrs={'class':'form-control'}),
         }
+
+class SolicitudForm2(forms.Form):
+    usuario = forms.ModelChoiceField(queryset=User.objects.all())
+    #usuario = forms.ChoiceField()
+    numero_mascotas = forms.IntegerField(required=True, min_value=1, max_value=5)
+    razones = forms.CharField(required=True)

@@ -28,6 +28,6 @@ class MascotaForm(forms.ModelForm):
             'sexo': forms.TextInput(attrs={'class':'form-control'}),
             'edad_aproximada': forms.TextInput(attrs={'class':'form-control'}),
             'fecha_rescate': forms.TextInput(attrs={'class':'form-control'}),
-            'usuario': forms.Select(attrs={'class':'form-control'}),
+            'usuario': forms.Select(attrs={'class':'form-control'}), #tiene que quedar fijo el usuario logueado
             'vacuna': forms.CheckboxSelectMultiple(),
         }
