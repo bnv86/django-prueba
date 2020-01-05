@@ -6,7 +6,7 @@ manage.py migrate
 manage.py createsuperuser
 username: admin
 email: vituccibruno@
-pass: ********
+pass: vitu1884
 
 D:\Ambientes\prueba-curso\Scripts\activate
 
@@ -44,7 +44,19 @@ from PIL import Image, ImageFilter, entre otros
 https://pillow.readthedocs.io/en/stable/reference/ImageFilter.html
 
 
+USUARIOS:
 
+bvitucci
+qwe789456
+
+negrotete
+zxc789456
+
+ricardoalvarez
+qwe789456
+
+yoli
+qwe789456
 
 
 
