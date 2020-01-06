@@ -23,6 +23,7 @@ python manage.py runserver 192.168.0.37:8000
 
 ir a localhost:8000
 si entra bien, luego a localhost:8000/admin
+http://172.17.220.109:8000/accounts/login/
 
 
 --- 
@@ -45,6 +46,9 @@ https://pillow.readthedocs.io/en/stable/reference/ImageFilter.html
 
 
 USUARIOS:
+
+bnv86
+bnvfray1884
 
 bvitucci
 qwe789456
