@@ -54,7 +54,7 @@ class SolicitudForm(forms.ModelForm):
         }
         widgets = {
             #'usuario': forms.TextInput(attrs={'class':'form-control'}),
-            #'usuario':forms.Select(attrs={'class':'form-control'}), #tiene que quedar fijo el usuario logueado
+            'usuario':forms.Select(attrs={'class':'form-control'}), #tiene que quedar fijo el usuario logueado
             'numero_mascotas': forms.NumberInput(attrs={'class':'form-control', 'min': 1, 'max': 5}),
             'razones':forms.Textarea(attrs={'class':'form-control'}),
         }

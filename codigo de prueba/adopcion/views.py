@@ -126,12 +126,12 @@ class SolicitudCreate(SuccessMessageMixin, CreateView):
     form_class = SolicitudForm
     #form_class1 = SolicitudForm
     #form_class2 = PersonaForm
-    #template_name = 'adopcion/form2.html'
+    #template_name = 'adopcion/form_old.html'
     template_name = 'adopcion/form_old.html'
     success_url = reverse_lazy('solicitud_listar')
     success_message = "La solicitud ha sido generada con éxito!"
 
-"""
+    """
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
         kwargs.update({'request': self.request})
@@ -141,11 +141,9 @@ class SolicitudCreate(SuccessMessageMixin, CreateView):
         self.initial.update({ 'created_by': self.request.user })
         return self.initial
 
-
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(SolicitudCreate, self).dispatch(*args, **kwargs)
-
 
     def form_valid(self, form):
         
@@ -154,7 +152,7 @@ class SolicitudCreate(SuccessMessageMixin, CreateView):
         obj.save()        
         self.object = obj
         return HttpResponseRedirect(self.get_success_url())
-"""
+    """
 
 def solicitud(request):
     form = SolicitudForm2()

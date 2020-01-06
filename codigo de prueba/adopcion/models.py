@@ -1,5 +1,4 @@
 from django.db import models
-from django.conf import settings
 from apps.usuario.models import User
 from django.contrib.auth.models import User
 
@@ -21,11 +20,8 @@ class Persona(models.Model):
         return '{} {}'.format(self.nombre, self.apellido)
 
 class Solicitud(models.Model):
-
-    #ATRIBUTO QUE RELACIONA Solicitud/Usuario
-    usuario = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE) #db_column='usuario_id', default=get_request_user(),
-    #usuario = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,)
-    #usuario = models.setdefault()
+    #ATRIBUTO QUE RELACIONA Solicitud/Persona
+    usuario = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
 
     numero_mascotas = models.IntegerField()
     razones = models.TextField()
@@ -35,10 +31,6 @@ class Solicitud(models.Model):
     
     #def __str__(self):
     #    return self.usuario.username
-
-    #def get_request_user(self, request):
-        # or any complex query result to set default value in ForeignKey
-        #return request.user.id
 
     
     def __str__(self):

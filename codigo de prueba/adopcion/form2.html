@@ -13,53 +13,13 @@
         <h1>Complete su solicitud</h1>
     </div>
 </div>
-<!--
+
 <form method="post">
     {% csrf_token %}
     {{ form }}
     <button class="btn btn-primary" type="submit">Guardar</button>
 </form>
--->
 
-<form method="post">
-{% csrf_token %}
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="form-group">
-                <label>Adoptante</label>
-    
-                <a 
-                <input class="form-control" name="usuario" value='{{ solicitud.usuario }}'>{{ request.user }}</a>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="form-group">
-                <label>Cantidad de mascotas</label>
-                <input class="form-control" type="number" min="1" max="5" name="numero_mascotas" value='{{ solicitud.numero_mascotas }}'>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="form-group">
-                <label>Razones de adopción</label>
-                <textarea class="form-control" rows="3" name="razones" value='{{ solicitud.razones }}'></textarea>
-            </div>
-        </div>
-    </div>
-    
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="form-group">
-                <button class="btn btn-primary" type="submit">Guardar</button>
-            </div>
-        </div>
-    </div>
-</form>
 
 {% endblock %}
 
