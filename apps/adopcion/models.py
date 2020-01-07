@@ -1,7 +1,9 @@
 from django.db import models
 from django.conf import settings
-from apps.usuario.models import User
+#from apps.usuario.models import User
+from apps.usuario.models import get_request_user
 from django.contrib.auth.models import User
+from django.contrib.auth.signals import user_logged_in
 
 # Create your models here.
 
@@ -22,8 +24,20 @@ class Persona(models.Model):
 
 class Solicitud(models.Model):
 
+    #def get_user(self):
+    #    return '{}'.format(self.id)
     #ATRIBUTO QUE RELACIONA Solicitud/Usuario
-    usuario = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE) #db_column='usuario_id', default=get_request_user(),
+    #user = User.get_username
+
+    def user_logged_in_handler(self, sender, request, user, **kwargs):
+        User.objects.get_or_create(
+        user = user,
+        session_id = request.session.session_key
+    )
+    #user_logged_in.connect(user_logged_in_handler)
+
+    usuario = models.ForeignKey(User, default=user_logged_in.connect(user_logged_in_handler), null=True, blank=True, on_delete=models.CASCADE) #db_column='usuario_id', default=get_request_user(), default=id(3) #default=User.objects.get(pk=2)
+    #usuario  = models.ForeignKey(User, related_name='username', on_delete=models.CASCADE)
     #usuario = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,)
     #usuario = models.setdefault()
 

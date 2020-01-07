@@ -15,6 +15,10 @@ from django.urls import reverse_lazy, reverse
 
 # Create your models here.
 
+def get_request_user(self, request):
+    # or any complex query result to set default value in ForeignKey
+    return request.user.id
+
 """
 class User(models.Model):
     first_name = models.CharField(max_length=50)

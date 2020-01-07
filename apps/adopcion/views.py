@@ -131,6 +131,7 @@ class SolicitudCreate(SuccessMessageMixin, CreateView):
     success_url = reverse_lazy('solicitud_listar')
     success_message = "La solicitud ha sido generada con éxito!"
 
+
 """
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()

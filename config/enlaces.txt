@@ -1,0 +1,16 @@
+http://blog.lincoln.hk/blog/2011/10/18/django-admin-auto-select-current-user/
+
+http://pydoc.net/django-salesforce/0.7.2/salesforce.testrunner.example.models/
+
+https://garethrees.org/2013/03/24/foreign/
+
+https://timonweb.com/posts/auto-select-current-user-in-django-admin-form/
+
+http://es.voidcc.com/question/p-ptdqdnht-k.html
+
+https://docs.djangoproject.com/en/3.0/ref/contrib/auth/
+
+http://gavinballard.com/associating-django-users-sessions/
+
+
+
