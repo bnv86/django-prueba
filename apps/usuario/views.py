@@ -136,6 +136,9 @@ def login_view(request):
 
     })
 
+def current_user(request):
+    current_user = request.user
+    return current_user.id
 
 """
 class UsuarioUpdate(SuccessMessageMixin, UpdateView):

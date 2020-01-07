@@ -23,13 +23,15 @@
 
 <form method="post">
 {% csrf_token %}
+
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="form-group">
                 <label>Adoptante</label>
-    
-                <a 
-                <input class="form-control" name="usuario" value='{{ solicitud.usuario }}'>{{ request.user }}</a>
+                <text class="form-control" disabled>{{ request.user }}</text>
+                <select class="form-control" name="usuario" hidden=True value='{{ solicitud.usuario }}'>
+                    <option>{{ request.user.id }}</option>
+                </select>
             </div>
         </div>
     </div>
@@ -47,7 +49,7 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="form-group">
                 <label>Razones de adopción</label>
-                <textarea class="form-control" rows="3" name="razones" value='{{ solicitud.razones }}'></textarea>
+                <input class="form-control" rows="3" name="razones" value='{{ solicitud.razones }}'>
             </div>
         </div>
     </div>
@@ -109,3 +111,21 @@
 -->
 
 <!-- <a class="form-control" name="usuario" value='{{ solicitud.usuario }}'>{{ user.get_username }}</a> -->
+
+<!--
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="form-group">
+                <label>Adoptante</label>
+                <select class="form-control" name="usuario" value='{{ solicitud.usuario }}'>
+                    {% if object_list %}
+                    {% for usuario in object_list %}
+                        {{ usuario.username }}
+                    {% endfor %}
+                    {% endif %}
+                </select> 
+            </div>
+        </div>
+    </div>
+-->
+<!-- {{ request.user.id }} disabled=True -->

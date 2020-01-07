@@ -114,6 +114,10 @@ def listadoSolicitud(request):
 def index_adopcion(request):
     return HttpResponse("Adopciones")
 
+def current_user(request):
+    current_user = request.user
+    return current_user.id
+
 class SolicitudList(ListView):
     #fields = '__all__'
     model = Solicitud
@@ -126,10 +130,11 @@ class SolicitudCreate(SuccessMessageMixin, CreateView):
     form_class = SolicitudForm
     #form_class1 = SolicitudForm
     #form_class2 = PersonaForm
-    #template_name = 'adopcion/form2.html'
-    template_name = 'adopcion/form_old.html'
+    template_name = 'adopcion/form2.html'
+    #template_name = 'adopcion/form_old.html'
     success_url = reverse_lazy('solicitud_listar')
     success_message = "La solicitud ha sido generada con éxito!"
+
 
 
 """
@@ -193,7 +198,7 @@ class SolicitudUpdate(SuccessMessageMixin, UpdateView):
     model2 = Persona
     #form_class = SolicitudForm
     #form_class2 = PersonaForm
-    template_name = 'adopcion/form_old.html'
+    template_name = 'adopcion/form2.html'
     success_url = reverse_lazy('solicitud_listar')
     success_message = "La solicitud ha sido modificada con éxito!"
 
