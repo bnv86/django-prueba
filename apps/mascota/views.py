@@ -151,7 +151,7 @@ class MascotaList(ListView):
 class MascotaCreate(SuccessMessageMixin ,CreateView):
     model = Mascota
     form_class = MascotaForm
-    template_name = 'mascota/form.html'
+    template_name = 'mascota/form2.html'
     #success_url = reverse_lazy('mascota:mascota_listar')
     success_url = reverse_lazy('mascota_listar')
     #success_message = "%(name)s was created successfully"
@@ -169,7 +169,7 @@ class MascotaCreate(SuccessMessageMixin ,CreateView):
 class MascotaUpdate(SuccessMessageMixin, UpdateView):
     model = Mascota
     form_class = MascotaForm
-    template_name = 'mascota/form.html'
+    template_name = 'mascota/form2.html'
     success_url = reverse_lazy('mascota_listar')
     success_message = "%(nombre)s ha sido modificado con éxito!"
 

@@ -1,9 +1,16 @@
 from django import forms
-from apps.mascota.models import Mascota, User
+from apps.mascota.models import Mascota, User, Vacuna
 from django.contrib.auth.models import User
 
 class MascotaForm(forms.ModelForm):
 
+    """
+    vacunas = forms.ModelMultipleChoiceField(
+            queryset=Vacuna.objects.all(),
+            widget=forms.CheckboxSelectMultiple,
+            required=False
+        )"""
+        
     class Meta:
         model = Mascota
 

@@ -9,8 +9,35 @@ https://timonweb.com/posts/auto-select-current-user-in-django-admin-form/
 http://es.voidcc.com/question/p-ptdqdnht-k.html
 
 https://docs.djangoproject.com/en/3.0/ref/contrib/auth/
+https://docs.djangoproject.com/en/3.0/topics/auth/default/
+
 
 http://gavinballard.com/associating-django-users-sessions/
+
+https://uniwebsidad.com/libros/bootstrap-3/capitulo-5/campos-de-formulario
+
+https://www.tutorialesprogramacionya.com/cssya/bootstrapya/detalleconcepto.php?punto=17&codigo=132&inicio=0
+
+https://stackoverflow.com/questions/55941510/query-django-default-user-model-object-using-email
+
+https://stackoverflow.com/questions/12615154/how-to-get-the-currently-logged-in-users-user-id-in-django
+
+
+https://stackoverflow.com/questions/937954/how-do-you-specify-a-default-for-a-django-foreignkey-model-or-adminmodel-field
+
+https://stackoverflow.com/questions/42904050/nameerror-name-request-is-not-defined-in-django-forms
+
+https://stackoverflow.com/questions/2414473/how-to-assign-currently-logged-in-user-as-default-value-for-a-model-field?lq=1
+
+https://stackoverflow.com/questions/4670783/make-the-user-in-a-model-default-to-the-current-user
+
+https://djangobook.com/mdj2-django-forms/
+
+https://medium.com/@a01208219/forms-de-django-857edcff9307
+
+https://www.fullstackpython.com/django-db-models-foreignkey-examples.html
+
+https://docs.djangoproject.com/en/1.10/topics/auth/customizing/#referencing-the-user-model
 
 
 

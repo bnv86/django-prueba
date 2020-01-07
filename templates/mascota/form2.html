@@ -1,0 +1,160 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+<!--
+<div class="row">
+    <div class="col-md-8 col-md-offset-4">
+        <a style="float:right; color:blue;" href="{{request.META.HTTP_REFERER}}" class="btn">Volver</a>
+    </div>
+</div>
+-->
+<div class="row">
+    <div class="col-md-8 col-md-offset-0">
+        <h1>Ingrese una mascota</h1>
+    </div>
+</div>
+<!--
+<form method="post">
+    {% csrf_token %}
+    {{ form }}
+    <button class="btn btn-primary" type="submit">Guardar</button>
+</form>
+-->
+
+<form method="post">
+{% csrf_token %}
+
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="form-group">
+                <label>Nombre o apodo</label>
+                <input class="form-control" type="text" name="nombre" value='{{ mascota.nombre }}'>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="form-group">
+                <label>Sexo</label>
+                <input class="form-control" type="text" name="sexo" value='{{ mascota.sexo }}'>
+            </div>
+        </div>
+    </div>    
+
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="form-group">
+                <label>Edad (aproximada)</label>
+                <input class="form-control" type="number" min="1" max="5" name="edad_aproximada" value='{{ mascota.edad_aproximada }}'>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="form-group">
+                <label>Fecha de rescate</label>
+                <input class="form-control" name="fecha_rescate" value='{{ mascota.fecha_rescate }}'>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="form-group">
+                <label>Adoptante</label>
+                <text class="form-control" disabled>{{ request.user }}</text>
+                <select class="form-control" name="usuario" hidden=True value='{{ mascota.usuario }}'>
+                    <option>{{ request.user.id }}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="form-group">
+                <label>Vacunas</label>
+                <select multiple class="form-control" name="vacuna" value='{{ mascota.vacuna }}'>
+                    <option>{{ request.vacuna }}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="form-group">
+                <button class="btn btn-primary" type="submit">Guardar</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+{% endblock %}
+
+<!--
+
+<form method="post">
+{% csrf_token %}
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="form-group">
+                <label>Adoptante</label>
+    
+                <a 
+                <input class="form-control" name="usuario" value='{{ solicitud.usuario }}'>{{ request.user.username }}</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="form-group">
+                <label>Cantidad de mascotas</label>
+                <input class="form-control" type="number" min="1" max="5" name="numero_mascotas" value='{{ solicitud.numero_mascotas }}'>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="form-group">
+                <label>Razones de adopción</label>
+                <textarea class="form-control" rows="3" name="razones" value='{{ solicitud.razones }}'></textarea>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="form-group">
+                <button class="btn btn-primary" type="submit">Guardar</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+-->
+
+<!-- <a class="form-control" name="usuario" value='{{ solicitud.usuario }}'>{{ user.get_username }}</a> -->
+
+<!--
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="form-group">
+                <label>Adoptante</label>
+                <select class="form-control" name="usuario" value='{{ solicitud.usuario }}'>
+                    {% if object_list %}
+                    {% for usuario in object_list %}
+                        {{ usuario.username }}
+                    {% endfor %}
+                    {% endif %}
+                </select> 
+            </div>
+        </div>
+    </div>
+-->
+<!-- {{ request.user.id }} disabled=True -->
