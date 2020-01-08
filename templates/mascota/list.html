@@ -36,7 +36,9 @@
             <td>{{ mascota.sexo }}</td>
             <td>{{ mascota.edad_aproximada }}</td>
             <td>{{ mascota.fecha_rescate }}</td>
-            <td>{{ mascota.vacuna }}</td>
+            <td>{% for v in mascota.vacuna.all %}
+                    {{ v.nombre }} <br>
+                {% endfor %} </td>
             <td>{{ mascota.usuario.first_name }} {{ mascota.usuario.last_name }}</td>
             <td>
                 <a class="btn btn-primary" href="{% url 'mascota_editar' mascota.id %}">Editar</a>
@@ -69,4 +71,17 @@
 
 <!--
     <td>{{ mascota.persona.nombre }} {{ mascota.persona.apellido }}</td>
+    {% for v in object_list %}
+        <tr>
+            <td>{{ v.vacuna }}</td>
+        </tr>
+    {% endfor %}
+
+    {% for v in mascota.vacuna %}
+        {{ v.nombre }}
+    {% endfor %}
+
+    <td>{% for v in mascota.vacuna %}
+        {{ v.nombre }}
+    {% endfor %} </td>
 -->

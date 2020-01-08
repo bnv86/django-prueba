@@ -76,16 +76,15 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="form-group">
                 <label>Vacunas</label>
-
-                <!-- <input class="form-control" type="checkbox" name="vacuna" value='{{ mascota.vacuna }}'> -->
-                {% for v in mascota.vacuna %}
-                    <select multiple class="form-control" name="usuario" value='{{ mascota.usuario }}'>
-                    <li>
-                        <option>{{ v.nombre }}</option>   
-                    </li>
-                    </select>
-                {% endfor %}
-                    
+                <br/>
+                        <label for="id_selected_users_1">
+                            <input form="theform" id="id_selected_users_1" name="selected_users" type="checkbox" value="ex2" /> Example2
+                        </label>     
+                    {% for v in queryset %}
+                        <input class="form-control" name="vacuna" type="checkbox" value='{{ mascota.vacuna }}'>
+                            <label for='vacunas'>{{ v.nombre }}</label>
+                            <br/>
+                    {% endfor %}
             </div>
         </div>
     </div>
@@ -102,12 +101,31 @@
 {% endblock %}
 
 <!--
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="form-group">
+            <label>VACUNAAAAAS</label>
+            {% for v in request.vacuna.all %}
+                <input class="form-control" name="vacuna" type="checkbox" value='{{ mascota.vacuna }}'>{{ request.user }}
+            {% endfor %}
+        </div>
+    </div>
+</div>
 
-{% for radio in myform.beatles %}
-    <label for="{{ radio.id_for_label }}">
-        {{ radio.choice_label }}
-        <span class="radio">{{ radio.tag }}</span>
+
+<li>
+    <label for="id_selected_users_1">
+        <input form="theform" id="id_selected_users_1" name="selected_users" type="checkbox" value="ex2" /> Example2
     </label>
-{% endfor %}
+</li>
 
+
+
+<ul>
+    <li>
+        <input name="vacuna" type="checkbox" value='{{ mascota.vacuna}}' /> 
+            <label for='vacunas'>{{ request.vacuna.all }}</label>
+            <br/>
+    </li>
+</ul>
 -->

@@ -1,0 +1,54 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+<!--
+<div class="row">
+    <div class="col-md-8 col-md-offset-4">
+        <a style="float:right; color:blue;" href="{{request.META.HTTP_REFERER}}" class="btn">Volver</a>
+    </div>
+</div>
+-->
+<div class="row">
+    <div class="col-md-8 col-md-offset-0">
+        <h1>Vacunas</h1>
+    </div>
+</div>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <td>#</td>
+            <td>ID</td>
+            <td>Nombre</td>
+        </tr>
+    </thead>
+    <tbody>
+        {% if object_list %}
+        {% for vacuna in object_list %}
+        <tr>
+            <td>{{ vacuna.id }}</td>
+            <td>{{ vacuna.nombre }}</td>
+        </tr>
+        {% endfor %}
+
+        {% else %}
+        <h1> No hay registros de vacunas</h1>
+        {% endif %}
+
+    </tbody>
+</table>
+
+<ul class="pager">
+    <li>
+        {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}">Previa</a>
+        {% endif %}
+    </li>
+    <li>
+        {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">Siguiente</a>
+        {% endif %}
+    </li>
+</ul>
+
+{% endblock %}
