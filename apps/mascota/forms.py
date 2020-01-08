@@ -4,12 +4,12 @@ from django.contrib.auth.models import User
 
 class MascotaForm(forms.ModelForm):
 
-    """
+    
     vacunas = forms.ModelMultipleChoiceField(
             queryset=Vacuna.objects.all(),
             widget=forms.CheckboxSelectMultiple,
             required=False
-        )"""
+        )
         
     class Meta:
         model = Mascota

@@ -76,9 +76,16 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="form-group">
                 <label>Vacunas</label>
-                <select multiple class="form-control" name="vacuna" value='{{ mascota.vacuna }}'>
-                    <option>{{ request.vacuna }}</option>
-                </select>
+
+                <!-- <input class="form-control" type="checkbox" name="vacuna" value='{{ mascota.vacuna }}'> -->
+                {% for v in mascota.vacuna %}
+                    <select multiple class="form-control" name="usuario" value='{{ mascota.usuario }}'>
+                    <li>
+                        <option>{{ v.nombre }}</option>   
+                    </li>
+                    </select>
+                {% endfor %}
+                    
             </div>
         </div>
     </div>
@@ -96,65 +103,11 @@
 
 <!--
 
-<form method="post">
-{% csrf_token %}
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="form-group">
-                <label>Adoptante</label>
-    
-                <a 
-                <input class="form-control" name="usuario" value='{{ solicitud.usuario }}'>{{ request.user.username }}</a>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="form-group">
-                <label>Cantidad de mascotas</label>
-                <input class="form-control" type="number" min="1" max="5" name="numero_mascotas" value='{{ solicitud.numero_mascotas }}'>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="form-group">
-                <label>Razones de adopción</label>
-                <textarea class="form-control" rows="3" name="razones" value='{{ solicitud.razones }}'></textarea>
-            </div>
-        </div>
-    </div>
-    
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="form-group">
-                <button class="btn btn-primary" type="submit">Guardar</button>
-            </div>
-        </div>
-    </div>
-</form>
-
+{% for radio in myform.beatles %}
+    <label for="{{ radio.id_for_label }}">
+        {{ radio.choice_label }}
+        <span class="radio">{{ radio.tag }}</span>
+    </label>
+{% endfor %}
 
 -->
-
-<!-- <a class="form-control" name="usuario" value='{{ solicitud.usuario }}'>{{ user.get_username }}</a> -->
-
-<!--
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="form-group">
-                <label>Adoptante</label>
-                <select class="form-control" name="usuario" value='{{ solicitud.usuario }}'>
-                    {% if object_list %}
-                    {% for usuario in object_list %}
-                        {{ usuario.username }}
-                    {% endfor %}
-                    {% endif %}
-                </select> 
-            </div>
-        </div>
-    </div>
--->
-<!-- {{ request.user.id }} disabled=True -->
